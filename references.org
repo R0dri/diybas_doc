@@ -1,0 +1,81 @@
+[1-1] Beyond standard polysomnography: advantages and indications for use of extended 10-20 EEG montage during laboratory sleep study evaluations
+[2-1] Oostenveld, R., Praamstra, P., 2001. The five percent electrode system for high-resolution EEG and ERP measurements. Clin. Neurophysiol. 112, 713–719.
+
+
+* Introduction [2hrs]
+1. Bioseñales Medir actividad eléctrica del cuerpo
+2. su utilidad (aplicaciónes)
+2. Tipos
+1. Complejidad de la actividad cerebral por electrodos
+2. Esta es una rama de la neurociencia
+3. Diagnostico muerte cerebral -> desordenes de sueño
+4. Deriva en BCI -> Interfaz de Usuario (rehabilitacion)
+5. ------ localizacion actividad cerebral
+6. Densidad de Electrodos
+7. Artefactos
+8.
+
+BIOSEÑALES.....
+
+
+* Problematica [2hrs]
+
+1. Conocimiento limitado, ciencia infante
+   1) Dificultades inerentes
+   2) Dificultades conexctuales
+2. Dificultades inerentes
+   - Artefactos
+   - SNR
+   - Patrones complejo. Dificultades circumstanciales / dado precicion y confiabilidad
+3. Dificultades contextuales
+   - Accesibilidad - Costo/disponibilidad/capacitacion
+   - Flexible - Opiones canales, alimentacion, filtros, amplificacion /software compatibilidad Datos (csv,edf,eeg)
+   - Potenciable - Actualizaciones firmware, software, hardware/compatibilidad externa/
+   - Amigable - conocimientos basicos, manuales, 
+* Objetivos [HELP]
+** Objetivo general
+Crear una alternativa accesible, flexible y amigable para adquirir y estudiar bio-señales complejas como EEG, ECG, EMG, EOG de manera confia
+** Objetivos específicos
+1. Crear un diseño robusto
+ 1. Confiable, que pueda cumplir los estándares de la IFCN y ACNS.
+ 2. Asequible, costo menor a las soluciones actuales.
+ 3. Modular, que se puedan añadir funcionalidades y quitar con relativa facilidad 
+ 4. Multi señal, que el diseño permita realizar modificaciónes que permitan la lectura de otras bio-señales.
+2. Generar/compilar documentación amplia y amigable
+
+* Justificación [3hrs]
+El campo de la neurociencia es bastante complejo y de cierto modo sub-estudiado. 
+La neurociencia es compleja??? por que
+Esto en efecto genera que la información disponible sea compleja para el público general ya que es un campo de estudio pequeño.
+
+ Otra de las razones por la que es un campo de estudio pequeño es que los dispositivos necesarios para poder realizar investigaciones serias en muchos casos son muy inaccesibles por su limitado público limitandose por el precio de producción y distribución. Muchos de estos dispositivos solo se encuentran en pocos países por la diferencia de poder adquisitivo.
+
+
+
+
+Los conocimientos de asignaturas como Electrónica Analógica I y II, Electrónica de Potencia, Microcontroladores, Procesamiento de Señales, Programación I  son fundamentales para el desarrollo e implementación de este sistema. Conocimientos del uso de protocólos de comunicación y bases de datos son igualmente importantes. Así mismo, habilidades como el diseño de PCBs, soldadura y el entendimiento del idioma ingles son igualmente importantes.
+
+
+* Limites y Alcances [1hr]
+Si bien este proyecto apunta a cumplir ciertos niveles de estándares internacionales, no se llevara acabo ningún proceso de certificación. Entre otros límites:
+** Límites
+- No se certificará el diseño. 
+- Las pruebas a las que sera sometido solo se mantendrán en el ámbito analógico, es decir, solo se sera riguroso en la implementación de los filtros, amplificadores y rechazo de ruido. 
+- Solo se realizará la prueba de diseño con 
+- módulo ADC que cumpla los estándares y 
+- 2 canales de las mismas características.
+** Alcances
+- Se pretende medir y grabar señales EEG.
+- Se busca obtener un diseño modular que permita la adición de un mínimo de 32 canales
+- el fácil remplazo del ADC y MCU
+- Se busca lograr una implementación teniendo en cuenta parámetros de seguridad anti ESD con un diseño galvánicamente aislado.
+- CMMR >= 120db
+- Filtros Acuerdo IFCN
+- Resolución acuerdo IFCN
+
+* Gantt [Fabio, help 1hr]
+* Bibliografía
+* Tutores [help, charlar]
+
+Ing, queria pedirle ayuda. Estuve corrigiendo el documento que revisaste y estaba aplicando las correcciones para el informe asi como mi perfil de tesis. En la parte de k
+

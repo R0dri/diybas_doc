@@ -1,0 +1,1314 @@
+* AC Analysis, 600E-3 highPass, 4th order Butterworth, 2 stages using AD8602
+
+* Input signal for AC and transient sinusoidal analysis
+* VIN IN V_GND AC 1 DC 2.5 SIN(2.5 1.75 16E-3)
+VIN IN 0 AC 1 DC 0 SIN(0 1.25 20)
+Vsignal_DC  V_GND 0 2.5
+* VIN IN 0 AC 1 DC 2.5 SIN(2.5 1.73 10)
+* VNOISE IN 0 AC 0 DC 2.5
+
+* XO IN   IN_D VCCG VEEG VREF suma
+XA IN   OUTA VCCG VEEG VREF sallenKeyhighPassStageA
+XB OUTA OUTB VCCG VEEG VREF sallenKeyhighPassStageB
+XC OUTB OUTC VCCG VEEG VREF multipleFeedbacklowPassStageA
+XD OUTC OUTF VCCG VEEG VREF multipleFeedbacklowPassStageB
+XE OUTF OUT  VCCG VNEG VREF Notch_v2
+* XF OUTF OUT VCCG VNEG 0    Notch_v2
+* XG OUTF OUT VCCG VEEG 0    Notch_v3
+* XH OUTF OUT4 VCCG VNEG 0    Notch_v4
+* XN OUTF OUT VCCG VEEG VREF Notch_v5
+
+VP VCCG 0 5
+VM VEEG 0 0
+VN VNEG 0 -5
+VR VREF 0 2.5
+
+*Simulation directive lines for AC Analysis
+.TEMP 27
+.AC DEC 100 16E-3 10E3
+* .TRAN 1ms 0.5
+*.NOISE V(OUT) VNOISE DEC 100 16E-3 10E3
+* .OPTIONS CHGTOL=10F ITL1=1000 ITL2=40 ITL4=20 TRTOL=14
+.PROBE V(out) V(outf) V(In) V(IN_D)
+
+
+
+
+* Node Assignments
+*                inverting input
+*                |   RG
+*                |   |    RG
+*                |   |    |  non_inverting input
+*                |   |    |    |    negative supply
+*                |   |    |    |     |    ref
+*                |   |    |    |     |    |   output
+*                |   |    |    |     |    |    |     positive supply
+*                |   |    |    |     |    |    |     |
+*.SUBCKT AD8422 IN-  RG-  RG+  IN+  -Vs   REF  VOUT  +Vs   
+
+.SUBCKT ina  IN-  RG-  RG+  IN+  -Vs   REF  VOUT  +Vs   
+
+
+
+.SUBCKT suma IN OUT VCC VEE Vref
+XA 1 OUT VCC VEE OUT TLV2401
+R1 Vref 1 1
+R2 IN 1 1
+.ENDS suma
+
+*SELECT OP AMP ADEQUATELY
+.SUBCKT DRL IN OUT VCC VEE REF
+XA1 REF 1 VCC VEE OUT TLV2401
+R1 1 IN 10k
+C1 1 2 1n
+R2 OUT 2 350k
+C2 OUT 2 1n
+.ENDS DRL
+
+.SUBCKT sallenKeyhighPassStageA IN OUT VCC VEE REF
+XA1 INP OUT VCC VEE OUT AD8602
+C1 IN 1 270E-9
+C2 1 INP 270E-9
+R1 1 OUT 376E3
+R2 INP REF 2.57E6
+.ENDS sallenKeyhighPassStageA
+
+.SUBCKT sallenKeyhighPassStageB IN OUT VCC VEE REF
+XA1 INP OUT VCC VEE OUT AD8602
+C1 IN 1 270E-9
+C2 1 INP 270E-9
+R1 1 OUT 908E3
+R2 INP REF 1.06E6
+.ENDS sallenKeyhighPassStageB
+
+.SUBCKT Notch IN OUT VCC VEE GND
+* X1 INP OUT VCC VEE OUT TLV2401
+XA1 GND 5 VCC VEE 6   TLV2401
+XB1 GND 7 VCC VEE 8   TLV2401
+XC1 9 OUT VCC VEE OUT TLV2401
+C1   8 7   1U
+C2   9 IN  1U
+R1   IN 5  10K
+R2   5 6   10K
+R3   7 6   2.49K
+R4   7 OUT 2.49K
+R5   8 9   4.02K
+R6   GND 9   200K
+.ENDS Notch
+
+.subckt Notch_v2 IN OUT VCC VEE GND
+XA1 GND 5 VCC VEE 6   TLV2401
+XB1 GND 7 VCC VEE 8   TLV2401
+XC1 9 OUT VCC VEE OUT TLV2401
+C1       8 7   1U
+C2       9 IN  1U
+R1       IN 5  10K
+R2       5 6   10K
+R3       7 6   309
+R4       7 OUT 309
+R5       8 9   32.4K
+R6       GND 9 1.58MEG
+.ends Notch_v2
+
+* .SUBCKT OPA4379 1 3 5 2 4
+.subckt Notch_v3 IN OUT VCC VEE GND
+XA1 GND 5 VCC VEE 6   OPA4379
+XB1 GND 7 VCC VEE 8   OPA4379
+XC1 9 OUT VCC VEE OUT OPA4379
+C1       8 7   1U
+C2       9 IN  1U
+R1       IN 5  10K
+R2       5 6   10K
+R3       7 6   309
+R4       7 OUT 309
+R5       8 9   32.4K
+R6       GND 9 1.58MEG
+.ends Notch_v3
+
+.subckt Notch_v4 IN OUT VCC VEE GND
+XA1 GND 5 VCC VEE 6   LMC7111B
+XB1 GND 7 VCC VEE 8   LMC7111B
+XC1 9 OUT VCC VEE OUT LMC7111B
+C1       8 7   1U
+C2       9 IN  1U
+R1       IN 5  10K
+R2       5 6   10K
+R3       7 6   309
+R4       7 OUT 309
+R5       8 9   32.4K
+R6       GND 9 1.58MEG
+.ends Notch_v4
+
+.subckt Notch_v5 IN OUT VCC VEE VREF
+XA1 VREF 5 VCC VEE 6  OPA4379
+XB1 VREF 7 VCC VEE 8  OPA4379
+XC1 9 OUT VCC VEE OUT OPA4379
+C1       8 7   1U
+C2       9 IN  1U
+R1       IN 5  10K
+R2       5 6   10K
+R3       7 6   309
+R4       7 OUT 309
+R5       8 9   32.4K
+R6       VREF 9 1.58MEG
+.ends Notch_v5
+
+.SUBCKT multipleFeedbacklowPassStageA IN OUT VCC VEE REF
+XA1 REF INM VCC VEE OUT AD8542
+R1 IN 1  2.77E3
+R2 1 INM 1.38E3
+R5 1 OUT 2.77E3
+C1 1 REF 3E-6
+C2 INM OUT 220E-9
+.ENDS multipleFeedbacklowPassStageA
+
+.SUBCKT multipleFeedbacklowPassStageB IN OUT VCC VEE REF
+XA1 REF INM VCC VEE OUT AD8542
+R1 IN 1  42E3
+R2 1 INM 21E3
+R5 1 OUT 42E3
+C1 1 REF 82E-9
+C2 INM OUT 35E-9
+.ENDS multipleFeedbacklowPassStageB
+
+* AD8422 SPICE Macro-model
+* Description: Amplifier
+* Generic Desc: 36V Bipolar Low Power, Rail to Rail Output, High Performance In-Amp
+* Developed by: ADI - LPG
+*
+* Revision History:
+* 1.0 (05/2013) - OQ (Initial Rev)
+* 2.0 (1/2015) - SH (Added missing .ENDS statement, improved compatibility, added parameters to model, organized netlist)
+* Copyright 2015 by Analog Devices.
+*
+* Refer to http://www.analog.com/Analog_Root/static/techSupport/designTools/spiceModels/license/spice_general.html for License Statement. Use of this model
+* indicates your acceptance with the terms and provisions in the License Statement.
+*
+* BEGIN Notes:
+*
+* Not Modeled:
+*   Temperature effects
+*   PSRR
+*
+* Parameters Modeled Include:
+*   Gain error, Vos, Ibias
+*   Bandwidth
+*   Voltage and current noise with 1/f noise
+*   CMRR vs frequency
+*   Supply current incl preamp and output load currents
+*   Output clamp vs load
+*   Input range and internal voltage limitations
+*   Slew Rate
+*   Pulse response vs cap load
+*   Input impedance
+*
+* Typical Specifications from ±15V Table Used in Model
+*
+* END Notes
+*
+* Node Assignments
+*                inverting input
+*                |   RG
+*                |   |    RG
+*                |   |    |  non_inverting input
+*                |   |    |    |    negative supply
+*                |   |    |    |     |    ref
+*                |   |    |    |     |    |   output
+*                |   |    |    |     |    |    |     positive supply
+*                |   |    |    |     |    |    |     |
+.SUBCKT AD8422  IN-  RG-  RG+  IN+  -Vs   REF  VOUT  +Vs   
+*** INPUT STAGE ***
+FIBIAS1 IN- 0 POLY(1) V21 600.0E-12 9.0E-5
+H3 4 IN- V24 6.645
+G4 0 5 4 0 2.64E-3
+R10 5 0 378.788
+D7 5 9 D
+D8 10 5 D
+V7 10 VNEGx 1.24
+V8 VPOSx 9 1.24
+E8 22 0 5 0 1
+FIBIAS2 IN+ 0 POLY(1) V23 400.0E-12 9.0E-5
+VOSI 7 IN+ -25.0E-6
+G5 0 8 7 0 2.64E-3
+R11 8 0 378.788
+D9 8 9 D
+D10 10 8 D
+E9 15 0 8 0 1
+G1 IN+ 0 POLY(2) (IN+, VMID) (IN+, IN-) 0 2.5E-12 5.0E-12
+G2 IN- 0 POLY(2) (IN-, VMID) (IN-, IN+) 0 2.5E-12 5.0E-12
+CCM1 IN+ 0 1.0E-12
+CCM2 IN- 0 1.0E-12
+CDIFF IN+ IN- 1.5E-12
+*
+*** PREAMPLIFIER STAGE ***
+GN1 Pos_Fdbk 16 15 16 778.8E-6
+VSH1 RG+ 16 -0.474
+C4 RG+ 0 3.688E-12
+R6 RG+ 17 9802.94
+VCS2 noninverting_out 17 0
+I1 VBIAS Pos_Fdbk 20.0E-6
+R23 Pos_Fdbk VBIAS 1E9
+G7 0 18 VBIAS Pos_Fdbk 1
+R8 18 0 10E9
+C2 noninverting_out Pos_Fdbk 10.19E-12
+R25 19 18 100
+D5 19 20 D
+D6 21 19 D
+V5 21 VNEGx 0.19
+V6 VPOSx 20 0.19
+GN2 Inv_Fdbk 23 22 23 778.8E-6
+VSH2 RG- 23 -0.474
+C3 RG- 0 3.692E-12
+R5 RG- 24 9802.94
+VCS1 Inverting_Out 24 0
+I2 VBIAS Inv_Fdbk 20.0E-6
+R18 VBIAS Inv_Fdbk 1E9
+G6 0 25 VBIAS Inv_Fdbk 1
+R7 25 0 10E9
+C1 Inverting_Out Inv_Fdbk 10.31E-12
+R24 26 25 100
+D3 26 20 D
+D4 21 26 D
+V1 VBIAS +Vs 20
+D40 Inv_Fdbk VBIAS D
+D41 Pos_Fdbk VBIAS D
+D42 VBIAS Inv_Fdbk D
+D43 VBIAS Pos_Fdbk D
+*
+*** SUBTRACTOR STAGE ***
+E4 Inverting_Out 0 26 0 1
+E5 noninverting_out 0 19 0 1
+R1 31 sub_neg 10000.0
+R2 sub_neg 24 9999.05
+R3 sub_pos 17 9998.85
+R4 REF sub_pos 10000.0
+VCS3 sub_out 31 0
+G8 0 sub_out sub_pos sub_neg 1E3
+R9 sub_out 0 10E6
+D13 REF 38 D
+D14 39 REF D
+V13 39 VNEGx 0.3
+V14 VPOSx 38 0.3
+D15 sub_pos 36 D
+D16 37 sub_pos D
+V15 37 VNEGx 0.05
+V16 VPOSx 36 1.05
+R22 sub_out_cl sub_out 100
+D1 sub_out_cl 45 D
+D2 46 sub_out_cl D
+H4 VX sub_out_cl V25 71.74
+*
+*** SLEW RATE AND OUTPUT STAGE ***
+G11 0 VZ VX VY 1e-3
+R26 VZ 0 100E6
+D21 40 VZ DSLEWP
+D22 40 0 DSLEWN
+G12 0 VY VZ 0 40.0E-6
+C7 VY 0 1E-9
+R30 VY 0 10e9
+G9 0 41 VY 42 1
+R12 41 0 1e10
+C5 41 0 56.15E-9
+G10 0 42 41 0 1.0E-3
+R17 42 0 1000.0
+C6 42 0 87.03E-12
+R27 43 42 0.1
+D11 43 45 D
+D12 46 43 D
+H1 VPOSx 45 POLY(1) VSRC 0.15 0 3E3
+H2 46 VNEGx POLY(1) VSNK 0.15 0 3E3
+VOSO VOUT 43 157.0E-6
+*
+*** NOISE ***
+V24 60 0 0
+R19 60 0 .0166
+D17 61 60 DN
+V18 61 0 0.2
+V25 64 0 0
+R20 64 0 .0166
+D19 65 64 DN
+V20 65 0 0.209
+V21 70 0 0
+R28 70 0 .0166
+D38 71 70 DIN
+V22 71 0 0.2
+V23 72 0 0
+R29 72 0 .0166
+D39 73 72 DIN
+V27 73 0 0.2
+*
+*** SUPPLY CURRENT AND BIASING ***
+GSUP +Vs -Vs POLY(1) (+Vs,-Vs) 195.2E-6 1.0E-6
+FSUP1 56 0 VOSO -1
+D24 90 +Vs DZ
+D25 -Vs 52 DZ
+D20 90 95 D
+VSRC 95 56 0
+D23 55 52 D
+VSNK 56 55 0
+FSUP2 57 0 VCS1 1
+D26 90 57 D
+D27 57 52 D
+FSUP3 58 0 VCS2 1
+D30 90 58 D
+D31 58 52 D
+FSUP4 59 0 VCS3 1
+D34 90 59 D
+D35 59 52 D
+E10 VPOSx 0 +Vs 0 1
+E11 VNEGx 0 -Vs 0 1
+EMID VMID 0 POLY(2) (+Vs, 0) (-Vs, 0) 0 0.5 0.5
+*
+*
+.MODEL D D(IS=1e-15 N=0.1 RS=1e-3)
+.MODEL DN D(IS=1e-15 KF=3.142E-7)
+.MODEL DIN D(IS=1e-15 KF=6.221E-6)
+.MODEL DZ D(IS=1e-15 BV=50 RS=1)
+.MODEL DSLEWP D(IS=1e-15 BV=19.5 RS=0.1)
+.MODEL DSLEWN D(IS=1e-15 BV=19.5 RS=0.1)
+*
+*
+.ENDS AD8422
+* $
+
+
+
+* OPA4379
+*****************************************************************************
+* (C) Copyright 2011 Texas Instruments Incorporated. All rights reserved.
+*****************************************************************************
+** This model is designed as an aid for customers of Texas Instruments.
+** TI and its licensors and suppliers make no warranties, either expressed
+** or implied, with respect to this model, including the warranties of
+** merchantability or fitness for a particular purpose.  The model is
+** provided solely on an "as is" basis.  The entire risk as to its quality
+** and performance is with the customer.
+****************************************************************************
+*
+* This model is subject to change without notice. Texas Instruments
+* Incorporated is not responsible for updating this model.
+*
+*****************************************************************************
+*
+** Released by: Analog eLab Design Center, Texas Instruments Inc.
+* Part: OPA4379
+* Date: 31MAY2011
+* Model Type: ALL-IN-ONE
+* Simulator: PSPICE
+* Simulator Version: 16.0.0.p001
+* EVM Order Number: N/A
+* EVM Users Guide: N/A
+* Datasheet: SBOS347DñNOVEMBER 2005ñREVISED MAY 2008
+*
+* Model Version: 1.0
+*
+*****************************************************************************
+*
+* Updates:
+*
+* Version 1.0 :
+* Release to Web
+*
+*****************************************************************************
+* BEGIN MODEL OPA4379
+*
+* BEGIN NOTES
+* This model is applicable to OPA379, OPA2379 and OPA4379
+* MODEL TEMP RANGE IS -40 TO +125 DEG C.
+* NOTE THAT THE MODEL IS FUNCTIONAL OVER THIS RANGE
+* BUT NOT ALL PARAMETERS TRACK THOSE OF THE REAL PART.
+*
+* FOR ACCURATE BIAS CURRENT SET ABSTOL TO 1E-13 OR AS LOW AS
+* ALLOWS CONVERGANCE IN YOUR CIRCUIT.
+*
+* END NOTES
+*
+* BEGIN MODEL FEATURES
+*
+* OPEN LOOP GAIN AND PHASE
+
+* INPUT VOLTAGE NOISE
+* INPUT CURRENT NOISE
+* INPUT BIAS CURRENT
+* INPUT CAPACITANCE
+* INPUT COMMON MODE VOLTAGE RANGE
+* INPUT CLAMPS TO RAILS
+* CMRR WITH FREQUENCY EFFECTS
+* PSRR WITH FREQUENCY EFFECTS
+* SLEW RATE
+* QUIESCENT CURRENT
+* QUIESCENT CURRENT VS VOLTAGE
+* QUIESCENT CURRENT VS TEMPERATURE
+* RAIL TO RAIL OUTPUT STAGE
+* HIGH CLOAD EFFECTS
+* CLASS AB BIAS IN OUTPUT STAGE
+* OUTPUT CURRENT THROUGH SUPPLIES
+* OUTPUT CURRENT LIMITING
+* OUTPUT CLAMPS TO RAILS
+* OUTPUT SWING VS OUTPUT CURRENT
+*
+* END MODEL FEATURES
+*
+* PINOUT ORDER +IN -IN +V -V OUT
+* PINOUT ORDER  1   3   5  2  4
+*
+.SUBCKT OPA4379 1 3 5 2 4
+*
+Q21 25 26 24 QNL
+R77 27 28 200
+R78 29 28 200
+R79 30 26 100
+R80 31 32 100
+R81 33 5 14
+R82 2 34 14
+R84 35 36 500
+R85 37 38 14
+R86 24 39 14
+D21 4 5 DD
+D22 2 4 DD
+D23 40 0 DIN
+D24 41 0 DIN
+I24 0 40 0.1E-3
+I25 0 41 0.1E-3
+E25 24 0 2 0 1
+E26 38 0 5 0 1
+D25 42 0 DVN
+D26 43 0 DVN
+I26 0 42 0.1E-3
+I27 0 43 0.1E-3
+E27 44 3 42 43 0.15
+G13 45 3 40 41 2E-9
+E28 46 0 38 0 1
+E29 47 0 24 0 1
+E30 48 0 49 0 1
+R88 46 50 1E6
+R89 47 51 1E6
+R90 48 52 1E6
+R91 0 50 100
+R92 0 51 100
+R93 0 52 100
+E31 53 1 52 0 0.002
+R94 54 49 1E3
+R95 49 55 1E3
+C29 46 50 0.2E-12
+C30 47 51 0.2E-12
+C31 48 52 10E-12
+E32 56 53 51 0 -0.02
+E33 45 56 50 0 0.02
+E34 57 24 38 24 0.5
+D27 35 38 DD
+D28 24 35 DD
+M24 58 59 34 34 NOUT L=3U W=200U
+M25 60 61 33 33 POUT L=3U W=200U
+M26 62 62 37 37 POUT L=3U W=200U
+M27 63 64 27 27 PIN L=3U W=83U
+M28 65 44 29 29 PIN L=3U W=83U
+M29 66 66 39 39 NOUT L=3U W=200U
+R96 67 61 100
+R97 68 59 100
+G14 35 57 69 57 0.02E-3
+R98 57 35 3E9
+C32 36 4 8.27E-12
+R99 24 63 2.6E3
+R100 24 65 2.6E3
+C33 63 65 120E-12
+C34 45 0 1.8E-12
+C35 44 0 1.8E-12
+C36 4 0 1E-12
+D29 59 25 DD
+D30 70 61 DD
+Q22 70 31 38 QPL
+V27 45 64 0
+M30 71 72 73 73 NIN L=3U W=83U
+R101 74 73 200
+M31 75 44 76 76 NIN L=3U W=83U
+R102 74 76 200
+R103 71 38 2.6E3
+R104 75 38 2.6E3
+C37 71 75 120E-12
+V28 64 72 5E-3
+M32 77 78 79 79 PINT L=6U W=500U
+M33 80 23 38 38 PIN L=6U W=500U
+V29 38 78 1.07
+M34 74 77 24 24 NIN L=6U W=500U
+M35 77 77 24 24 NIN L=6U W=500U
+G15 35 57 81 57 0.02E-3
+I28 62 66 0.5E-6
+E35 55 0 45 0 1
+E36 54 0 3 0 1
+M36 23 23 38 38 PIN L=6U W=500U
+I29 23 24 2.3E-12
+V30 80 28 0
+R105 4 60 25
+R106 58 4 25
+J5 82 45 82 JC
+J6 82 44 82 JC
+J7 44 83 44 JC
+J8 45 83 45 JC
+C38 45 44 0.2E-12
+E37 84 57 75 71 1
+R107 84 81 10E3
+C39 81 57 40E-12
+E38 85 57 65 63 1
+R108 85 69 10E3
+C40 69 57 40E-12
+G16 86 57 35 57 -1E-3
+G17 57 87 35 57 1E-3
+G18 57 88 66 24 1E-3
+G19 89 57 38 62 1E-3
+D31 89 86 DD
+D32 87 88 DD
+R110 86 89 1E8
+R111 88 87 1E8
+R112 89 38 1E3
+R113 24 88 1E3
+E39 38 67 38 89 1
+E40 68 24 88 24 1
+R114 87 57 1E10
+R115 88 57 1E10
+R116 57 89 1E10
+R117 57 86 1E10
+R118 2 5 18E6
+G20 5 2 90 0 -5E-6
+D33 91 0 DD
+V33 91 90 0.65
+R119 0 90 1E6
+I31 5 2 1.8E-6
+R120 79 80 60E3
+I34 0 91 1E-3
+V45 38 82 0.3
+V46 83 24 0.3
+E42 5 32 5 33 3
+E43 30 2 34 2 4
+R169 35 4 3E11
+G29 23 24 92 0 2.3E-6
+V134 92 93 1
+R378 0 92 1E12
+D64 93 94 DD
+V135 94 0 0.5
+R379 95 93 1E3
+D65 96 95 DD
+R380 0 95 1E6
+D66 97 95 DD
+R381 95 96 1E12
+R382 95 97 1E12
+E119 96 0 1 3 20
+E120 97 0 1 3 -20
+R391 0 92 1E12
+R394 0 94 1E12
+G35 45 0 98 0 10E-12
+I41 45 0 0.5E-12
+I46 0 99 1E-3
+D67 99 0 DD
+V136 99 100 0.7
+R395 0 100 1E6
+E121 101 0 100 0 -571
+R396 0 101 1E6
+R397 102 101 1E6
+D68 103 102 DD
+V137 103 104 27
+V138 102 98 26.4
+I47 0 105 1E-3
+D69 105 0 DD
+V139 105 106 0.7
+R398 0 106 1E6
+E122 104 0 106 0 1
+G36 3 0 98 0 10E-12
+I48 3 0 0.5E-12
+R399 0 98 1E9
+R400 0 98 1E9
+R401 1 53 1E9
+R402 53 56 1E9
+R403 56 45 1E9
+R404 3 44 1E9
+R405 81 81 1E9
+R406 57 69 1E9
+R407 62 38 1E11
+R408 24 66 1E11
+R409 33 61 1E11
+R410 59 34 1E11
+.MODEL JC NJF IS=1E-18
+.MODEL DVN D KF=7E-14 IS=1E-16
+.MODEL DIN D
+.MODEL DD D
+.MODEL DE D IS=3E-17
+.MODEL QPL PNP
+.MODEL QNL NPN
+.MODEL POUT PMOS KP=200U VTO=-0.7
+.MODEL NOUT NMOS KP=200U VTO=0.7
+.MODEL PIN PMOS KP=200U VTO=-0.7
+.MODEL NIN NMOS KP=200U VTO=0.7
+.MODEL PINT PMOS KP=200U VTO=-0.7 LAMBDA=0.01
+.ENDS
+* END MODEL OPA4379
+
+
+
+
+*//////////////////////////////////////////////////////////////////////
+* (C) National Semiconductor, Inc.
+* Models developed and under copyright by:
+* National Semiconductor, Inc.
+
+*/////////////////////////////////////////////////////////////////////
+* Legal Notice: This material is intended for free software support.
+* The file may be copied, and distributed; however, reselling the
+*  material is illegal
+
+*////////////////////////////////////////////////////////////////////
+* For ordering or technical information on these models, contact:
+* National Semiconductor's Customer Response Center
+*                 7:00 A.M.--7:00 P.M.  U.S. Central Time
+*                                (800) 272-9959
+* For Applications support, contact the Internet address:
+*  amps-apps@galaxy.nsc.com
+
+*/////////////////////////////////////////////////
+*LMC7111A  Operational Amplifier Macro-Model
+*/////////////////////////////////////////////////
+*
+* connections:      non-inverting input
+*                   |      inverting input
+*                   |      |      positive power supply
+*                   |      |      |       negative power supply
+*                   |      |      |       |      output
+*                   |      |      |       |      |
+*                   |      |      |       |      |
+.SUBCKT LMC7111A    3      2      4       5      6
+*
+*Features
+*Tiny SOT23-5 Package
+*Wide Common Mode Input Range
+*50 KHz Gain-Bandwidth at 5V
+*
+EOX 120 10 31 32 2.0
+RCX 120 121 1K
+RDX 121 10 1K
+RBX 120 122 1K
+GOS 10 57 122 121 1.0
+RVOS 31 32 1K
+RINB 2 18 1000
+RINA 3 19 1000
+DIN1 5 18 DMOD2
+DIN2 18 4 DMOD2
+DIN3 5 19 DMOD2
+DIN4 19 4 DMOD2
+EXX 10 5 17 5 1.0
+EEE 10 50 17 5 1.0
+ECC 40 10 4 17 1.0
+RAA 4 17 100MEG
+RBB 17 5 100MEG
+ISET 10 24 1e-3
+DA1 24 23 DMOD1
+RBAL 23 22 1000
+ESUPP 22 21 4 5 1.0
+VOFF 21 10 -1.25
+DA2 24 25 DMOD1
+VSENS1 25 26 DC 0
+RSET 26 10 1K
+CSET 26 10 1e-10
+FSET 10 31 VSENS1 1.0
+R001 34 10 1K
+FTEMP 10 27 VSENS1 1.0
+DTA 27 10 DMOD2
+DTB 28 29 DMOD2
+VTEMP 29 10 DC 0
+ECMR 38 10 11 10 1.0
+VCMX 38 39 DC 0
+RCM2 41 10 1MEG
+EPSR 42 10 4 10 1.0
+CDC1 43 42 10U
+VPSX 43 44 DC 0
+RPSR2 45 10 1MEG
+FCXX 57 10 VCXX 100
+DCX1 98 97 DMOD1
+DCX2 95 94 DMOD1
+RCX1 99 98 100
+RCX2 94 99 100
+VCXX 99 96 DC 0
+ECMX 96 10 11 10 1.0
+DLIM1 52 57 DMOD1
+DLIM2 57 51 DMOD1
+ELIMP 51 10 26 10 99.3
+GDM 10 57 3 2 1
+C1 58 59 1e-10
+DCLMP2 59 40 DMOD1
+DCLMP1 50 59 DMOD1
+RO2 59 10 1K
+GO3 10 71 59 10 1
+RO3 71 10 1
+DDN1 73 74 DMOD1
+DDN2 73 710 DMOD1
+DDP1 75 72 DMOD1
+DDP2 71 720 DMOD1
+RDN2 710 71 100
+RDP 720 72 100
+VOOP 40 76 DC 0
+VOON 77 50 DC 0
+QNO 76 73 78 NPN1
+QNP 77 72 79 PNP1
+RNO 78 81 1
+RPO 79 81 1
+VOX 86 6 DC 0
+RNT 76 81 100MEG
+RPT 81 77 1MEG
+FX 10 93 VOX 1.0
+DFX1 93 91 DMOD1
+VFX1 91 10 DC 0
+DFX2 92 93 DMOD1
+VFX2 10 92 DC 0
+FPX 4 10 VFX1 1.0
+FNX 10 5 VFX2 1.0
+RAX 122 10 MRAX 1.006000e+03
+* Input Offset Voltage
+.MODEL MRAX RES (TC1=4e-06)
+FIN1 18 5 VTEMP 0.99
+FIN2 19 5 VTEMP 1.01
+* Input Bias Currents
+CIN1 2 10 1e-12
+CIN2 3 10 1e-12
+* Common Mode Input Capacitance
+RD1 18 11 5e+11
+RD2 19 11 5e+11
+* Diff. Input Resistance
+RCM 11 10 9.75e+12
+* Common Mode Input Resistance
+FCMR 10 57 VCMX 56.2341
+* Low Freq. CMRR
+FPSR 10 57 VPSX 200
+* Low Freq. PSRR
+RSLOPE 4 5 2e+06
+* Slope of Supp. Curr. vs. Supp. Volt.
+GPWR 4 5 26 10 1.75e-05
+* Quiescent Supply Current
+ETEMP 27 28 32 33 0.553186
+RIB 32 33 MRIB 1K
+* Temp. Co. of Input Currents
+.MODEL MRIB RES (TC1=0.000554971)
+RISC 33 34 MRISC 1K
+.MODEL MRISC RES (TC1=-0.001)
+RCM1 39 41 177.828
+CCM 41 10 1.59155e-09
+* CMRR vs. Freq.
+RPSR1 44 45 316.228
+CPSR 45 10 1.59155e-09
+* PSRR vs. Freq.
+ELIMN 10 52 26 10 124.3
+RDM 57 10 1813.8
+C2 57 10 8.77467e-10
+ECMP 40 97 26 10 0.5
+ECMN 95 50 26 10 0
+G2 58 10 57 10 2e-08
+R2 58 10 27566.4
+GO2 59 10 58 10 500
+* Avol and Slew-Rate Settings
+EPOS 40 74 26 10 0
+ENEG 75 50 26 10 0.2
+* Output Voltage Swing Settings
+GSOURCE 74 73 33 34 7e-05
+GSINK 72 75 33 34 7e-05
+* Output Current Settings
+ROO 81 86 27.5
+.MODEL DMOD1 D
+*-- DMOD1 DEFAULT PARAMETERS
+*IS=1e-14 RS=0 N=1 TT=0 CJO=0
+*VJ=1 M=0.5 EG=1.11 XTI=3 FC=0.5
+*KF=0 AF=1 BV=inf IBV=1e-3 TNOM=27
+.MODEL DMOD2 D  (IS=1e-17)
+*-- DMOD2 DEFAULT PARAMETERS
+*RS=0 N=1 TT=0 CJO=0
+*VJ=1 M=0.5 EG=1.11 XTI=3 FC=0.5
+*KF=0 AF=1 BV=inf IBV=1e-3 TNOM=27
+.MODEL NPN1 NPN (BF=100 IS=1e-15)
+*-- NPN1 DEFAULT PARAMETERS
+*NF=1 VAF=inf IKF=inf ISE=0 NE=1.5
+*BR=1 NR=1 VAR=inf IKR=inf ISC=0
+*NC=2 RB=0 IRB=inf RBM=0 RE=0 RC=0
+*CJE=0 VJE=0.75 MJE=0.33 TF=0 XTF=0
+*VTF=inf ITF=0 PTF=0 CJC=0 VJC=0.75
+*MJC=0.33 XCJC=1 TR=0 CJS=0 VJS=0.75
+*MJS=0 XTB=0 EG=1.11 XTI=3 KF=0 AF=1
+*FC=0.5 TNOM=27
+.MODEL PNP1 PNP (BF=100 IS=1e-15)
+*-- PNP1 DEFAULT PARAMETERS
+*NF=1 VAF=inf IKF=inf ISE=0 NE=1.5
+*BR=1 NR=1 VAR=inf IKR=inf ISC=0
+*NC=2 RB=0 IRB=inf RBM=0 RE=0 RC=0
+*CJE=0 VJE=0.75 MJE=0.33 TF=0 XTF=0
+*VTF=inf ITF=0 PTF=0 CJC=0 VJC=0.75
+*MJC=0.33 XCJC=1 TR=0 CJS=0 VJS=0.75
+*MJS=0 XTB=0 EG=1.11 XTI=3 KF=0 AF=1
+*FC=0.5 TNOM=27
+.ENDS
+*
+* $
+
+*//////////////////////////////////////////////////////////////////////
+* (C) National Semiconductor, Inc.
+* Models developed and under copyright by:
+* National Semiconductor, Inc.
+
+*/////////////////////////////////////////////////////////////////////
+* Legal Notice: This material is intended for free software support.
+* The file may be copied, and distributed; however, reselling the
+*  material is illegal
+
+*////////////////////////////////////////////////////////////////////
+* For ordering or technical information on these models, contact:
+* National Semiconductor's Customer Response Center
+*                 7:00 A.M.--7:00 P.M.  U.S. Central Time
+*                                (800) 272-9959
+* For Applications support, contact the Internet address:
+*  amps-apps@galaxy.nsc.com
+
+*/////////////////////////////////////////////////
+*LMC7111B  Operational Amplifier Macro-Model
+*/////////////////////////////////////////////////
+*
+* connections:      non-inverting input
+*                   |      inverting input
+*                   |      |      positive power supply
+*                   |      |      |       negative power supply
+*                   |      |      |       |      output
+*                   |      |      |       |      |
+*                   |      |      |       |      |
+.SUBCKT LMC7111B     3      2      4       5      6
+*
+*Features
+*Tiny SOT23-5 Package
+*Wide Common Mode Input Range
+*50 KHz Gain-Bandwidth at 5V
+*
+EOX 120 10 31 32 2.0
+RCX 120 121 1K
+RDX 121 10 1K
+RBX 120 122 1K
+GOS 10 57 122 121 1.0
+RVOS 31 32 1K
+RINB 2 18 1000
+RINA 3 19 1000
+DIN1 5 18 DMOD2
+DIN2 18 4 DMOD2
+DIN3 5 19 DMOD2
+DIN4 19 4 DMOD2
+EXX 10 5 17 5 1.0
+EEE 10 50 17 5 1.0
+ECC 40 10 4 17 1.0
+RAA 4 17 100MEG
+RBB 17 5 100MEG
+ISET 10 24 1e-3
+DA1 24 23 DMOD1
+RBAL 23 22 1000
+ESUPP 22 21 4 5 1.0
+VOFF 21 10 -1.25
+DA2 24 25 DMOD1
+VSENS1 25 26 DC 0
+RSET 26 10 1K
+CSET 26 10 1e-10
+FSET 10 31 VSENS1 1.0
+R001 34 10 1K
+FTEMP 10 27 VSENS1 1.0
+DTA 27 10 DMOD2
+DTB 28 29 DMOD2
+VTEMP 29 10 DC 0
+ECMR 38 10 11 10 1.0
+VCMX 38 39 DC 0
+RCM2 41 10 1MEG
+EPSR 42 10 4 10 1.0
+CDC1 43 42 10U
+VPSX 43 44 DC 0
+RPSR2 45 10 1MEG
+FCXX 57 10 VCXX 100
+DCX1 98 97 DMOD1
+DCX2 95 94 DMOD1
+RCX1 99 98 100
+RCX2 94 99 100
+VCXX 99 96 DC 0
+ECMX 96 10 11 10 1.0
+DLIM1 52 57 DMOD1
+DLIM2 57 51 DMOD1
+ELIMP 51 10 26 10 99.3
+GDM 10 57 3 2 1
+C1 58 59 1e-10
+DCLMP2 59 40 DMOD1
+DCLMP1 50 59 DMOD1
+RO2 59 10 1K
+GO3 10 71 59 10 1
+RO3 71 10 1
+DDN1 73 74 DMOD1
+DDN2 73 710 DMOD1
+DDP1 75 72 DMOD1
+DDP2 71 720 DMOD1
+RDN2 710 71 100
+RDP 720 72 100
+VOOP 40 76 DC 0
+VOON 77 50 DC 0
+QNO 76 73 78 NPN1
+QNP 77 72 79 PNP1
+RNO 78 81 1
+RPO 79 81 1
+VOX 86 6 DC 0
+RNT 76 81 100MEG
+RPT 81 77 1MEG
+FX 10 93 VOX 1.0
+DFX1 93 91 DMOD1
+VFX1 91 10 DC 0
+DFX2 92 93 DMOD1
+VFX2 10 92 DC 0
+FPX 4 10 VFX1 1.0
+FNX 10 5 VFX2 1.0
+RAX 122 10 MRAX 1.014000e+03
+* Input Offset Voltage
+.MODEL MRAX RES (TC1=4e-06)
+FIN1 18 5 VTEMP 0.99
+FIN2 19 5 VTEMP 1.01
+* Input Bias Currents
+CIN1 2 10 1e-12
+CIN2 3 10 1e-12
+* Common Mode Input Capacitance
+RD1 18 11 5e+11
+RD2 19 11 5e+11
+* Diff. Input Resistance
+RCM 11 10 9.75e+12
+* Common Mode Input Resistance
+FCMR 10 57 VCMX 56.2341
+* Low Freq. CMRR
+FPSR 10 57 VPSX 200
+* Low Freq. PSRR
+RSLOPE 4 5 2e+06
+* Slope of Supp. Curr. vs. Supp. Volt.
+GPWR 4 5 26 10 1.75e-05
+* Quiescent Supply Current
+ETEMP 27 28 32 33 0.553186
+RIB 32 33 MRIB 1K
+* Temp. Co. of Input Currents
+.MODEL MRIB RES (TC1=0.000554971)
+RISC 33 34 MRISC 1K
+.MODEL MRISC RES (TC1=-0.001)
+RCM1 39 41 177.828
+CCM 41 10 1.59155e-09
+* CMRR vs. Freq.
+RPSR1 44 45 316.228
+CPSR 45 10 1.59155e-09
+* PSRR vs. Freq.
+ELIMN 10 52 26 10 124.3
+RDM 57 10 1813.8
+C2 57 10 8.77467e-10
+ECMP 40 97 26 10 0.5
+ECMN 95 50 26 10 0
+G2 58 10 57 10 2e-08
+R2 58 10 27566.4
+GO2 59 10 58 10 500
+* Avol and Slew-Rate Settings
+EPOS 40 74 26 10 0
+ENEG 75 50 26 10 0.2
+* Output Voltage Swing Settings
+GSOURCE 74 73 33 34 7e-05
+GSINK 72 75 33 34 7e-05
+* Output Current Settings
+ROO 81 86 27.5
+.MODEL DMOD1 D
+*-- DMOD1 DEFAULT PARAMETERS
+*IS=1e-14 RS=0 N=1 TT=0 CJO=0
+*VJ=1 M=0.5 EG=1.11 XTI=3 FC=0.5
+*KF=0 AF=1 BV=inf IBV=1e-3 TNOM=27
+.MODEL DMOD2 D  (IS=1e-17)
+*-- DMOD2 DEFAULT PARAMETERS
+*RS=0 N=1 TT=0 CJO=0
+*VJ=1 M=0.5 EG=1.11 XTI=3 FC=0.5
+*KF=0 AF=1 BV=inf IBV=1e-3 TNOM=27
+.MODEL NPN1 NPN (BF=100 IS=1e-15)
+*-- NPN1 DEFAULT PARAMETERS
+*NF=1 VAF=inf IKF=inf ISE=0 NE=1.5
+*BR=1 NR=1 VAR=inf IKR=inf ISC=0
+*NC=2 RB=0 IRB=inf RBM=0 RE=0 RC=0
+*CJE=0 VJE=0.75 MJE=0.33 TF=0 XTF=0
+*VTF=inf ITF=0 PTF=0 CJC=0 VJC=0.75
+*MJC=0.33 XCJC=1 TR=0 CJS=0 VJS=0.75
+*MJS=0 XTB=0 EG=1.11 XTI=3 KF=0 AF=1
+*FC=0.5 TNOM=27
+.MODEL PNP1 PNP (BF=100 IS=1e-15)
+*-- PNP1 DEFAULT PARAMETERS
+*NF=1 VAF=inf IKF=inf ISE=0 NE=1.5
+*BR=1 NR=1 VAR=inf IKR=inf ISC=0
+*NC=2 RB=0 IRB=inf RBM=0 RE=0 RC=0
+*CJE=0 VJE=0.75 MJE=0.33 TF=0 XTF=0
+*VTF=inf ITF=0 PTF=0 CJC=0 VJC=0.75
+*MJC=0.33 XCJC=1 TR=0 CJS=0 VJS=0.75
+*MJS=0 XTB=0 EG=1.11 XTI=3 KF=0 AF=1
+*FC=0.5 TNOM=27
+.ENDS
+* $
+
+
+
+* TLV240X_5V operational amplifier "macromodel" subcircuit
+* created using Parts release 8.0 on 11/08/99 at 07:55
+* Parts is a MicroSim product.
+*
+* connections:     non-inverting input
+*                  | inverting input
+*                  | | positive power supply
+*                  | | | negative power supply
+*                  | | | | output
+*                  | | | | |
+.subckt TLV2401  1 2 3 4 5
+*
+  c1   11 12 9.8944E-12
+  c2    6  7 30.000E-12
+  cee  10 99 8.8738E-12
+  dc    5 53 dy
+  de   54  5 dy
+  dlp  90 91 dx
+  dln  92 90 dx
+  dp    4  3 dx
+  egnd 99  0 poly(2) (3,0) (4,0) 0 .5 .5
+  fb    7 99 poly(5) vb vc ve vlp vln 0 61.404E6 -1E3 1E3 61E6 -61E6
+  ga    6  0 11 12 1.0216E-6
+  gcm   0  6 10 99 10.216E-12
+  iee  10  4 dc 54.540E-9
+  ioff 0 6 dc 5e-12
+  hlim 90  0 vlim 1K
+  q1   11  2 13 qx1
+  q2   12  1 14 qx2
+  r2    6  9 100.00E3
+  rc1   3 11 978.81E3
+  rc2   3 12 978.81E3
+  re1  13 10 30.364E3
+  re2  14 10 30.364E3
+  ree  10 99 3.6670E9
+  ro1   8  5 10
+  ro2   7 99 10
+  rp    3  4 1.4183E6
+  vb    9  0 dc 0
+  vc    3 53 dc .88315
+  ve   54  4 dc .88315
+  vlim  7  8 dc 0
+  vlp  91  0 dc 540
+  vln   0 92 dc 540
+.model dx D(Is=800.00E-18)
+.model dy D(Is=800.00E-18 Rs=1m Cjo=10p)
+.model qx1 NPN(Is=800.00E-18 Bf=27.270E21)
+.model qx2 NPN(Is=800.0000E-18 Bf=27.270E21)
+.ends
+* $
+
+* AD8602 SPICE Macro-model Typical Values
+* Description: Amplifier
+* Generic Desc: 2.7/5V, CMOS, OP, Low Vos, RRIO, 2X
+* Developed by: OEB / ADSC
+* Revision History: 08/10/2012 - Updated to new header style
+* 1.0 (03/2000)
+* Copyright 1999, 2012 by Analog Devices
+*
+* Refer to http://www.analog.com/Analog_Root/static/techSupport/designTools/spiceModels/license/spice_general.html for License Statement. Use of this model
+* indicates your acceptance of the terms and provisions in the License Statement.
+*
+* BEGIN Notes:
+*
+* Not Modeled:
+*
+* Parameters modeled include:
+*
+* END Notes
+*
+* Node Assignments
+*			noninverting input
+*			|	inverting input
+*			|	|	 positive supply
+*			|	|	 |	 negative supply
+*			|	|	 |	 |	 output
+*			|	|	 |	 |	 |
+*			|	|	 |	 |	 |
+.SUBCKT AD8602 		1       2       99      50      45
+*
+* INPUT STAGE
+*
+M1  14  7  8  8 PIX L=1E-6 W=982E-6
+M2  16  2  8  8 PIX L=1E-6 W=982E-6
+M3  17  7 10 10 NIX L=1E-6 W=982E-6
+M4  18  2 10 10 NIX L=1E-6 W=982E-6
+RC5 14 50 4E+3
+RC6 16 50 4E+3
+RC7 99 17 4E+3
+RC8 99 18 4E+3
+C1  14 16 0.6E-12
+C2  17 18 0.6E-12
+I1  99  8 100E-6
+I2  10 50 100E-6
+V1  99  9 0.3
+V2  13 50 0.3
+D1   8  9 DX
+D2  13 10 DX
+EOS  7  1 POLY(3) (22,98) (73,98) (81,98) 300E-6 1 1 1
+IOS  1  2 2.5E-12
+*
+* CMRR 90dB, ZERO AT 15kHz, POLE AT 2MHz
+*
+ECM1 21 98 POLY(2) (1,98) (2,98) 0 0.5 0.5
+CCM1 21 22 3.54E-10
+RCM1 21 22 30000
+RCM2 22 98 1
+*
+* PSRR=100dB, ZERO AT 300Hz
+*
+EPSY 98 72 POLY(1) (99,50) 0 1
+CPS3 72 73 5.30E-9
+RPS3 72 73 100E+3
+RPS4 73 98 1
+*
+*
+* VOLTAGE NOISE REFERENCE OF 33nV/rt(Hz)
+*
+VN1 80 98 0
+RN1 80 98 16.45E-3
+HN  81 98 VN1 33
+RN2 81 98 1
+*
+* INTERNAL VOLTAGE REFERENCE
+*
+EREF 98  0 POLY(2) (99,0) (50,0) 0 .5 .5
+GSY  99 50 (99,50) 48E-6
+EVP  97 98 POLY(1) (99,50) -0.6 0.5
+EVN  51 98 POLY(1) (50,99) 0.6 0.5
+*
+* GAIN STAGE
+*
+G1 98 30 POLY(2) (14,16) (17,18) 0 375E-6 375E-6
+R1 30 98 2.53E+6
+CF 45 30 50E-12
+D3 30 97 DX
+D4 51 30 DX
+*
+* OUTPUT STAGE
+*
+M5  45 46 99 99 POX L=1E-6 W=1.6E-3
+M6  45 47 50 50 NOX L=1E-6 W=3.33E-3
+EG1 99 46 POLY(1) (98,30) 0.5216 1
+EG2 47 50 POLY(1) (30,98) 0.4622 1
+*
+* MODELS
+*
+.MODEL POX PMOS (LEVEL=2,KP=10E-6,VTO=-0.328,LAMBDA=0.01,RD=0)
+.MODEL NOX NMOS (LEVEL=2,KP=10E-6,VTO=+0.328,LAMBDA=0.01,RD=0)
+.MODEL PIX PMOS (LEVEL=2,KP=10E-6,VTO=-0.328,LAMBDA=0.01,KF=2.5E-31,AF=1,TOX=100E-3)
+.MODEL NIX NMOS (LEVEL=2,KP=10E-6,VTO=+0.328,LAMBDA=0.01,KF=2.5E-31,AF=1,TOX=100E-3)
+.MODEL DX D(IS=1E-14,RS=5)
+.ENDS AD8602
+*
+*$
+
+
+
+* AD8542 SPICE Macro-model Typical Values
+* Description: Amplifier
+* Generic Desc: 2.7/5V, CMOS, OP, Low Pwr, RRIO, 2X
+* Developed by: TAM / ADSC
+* Revision History: 08/10/2012 - Updated to new header style
+* 1.0 (06/1998)
+* Copyright 1998, 2012 by Analog Devices
+*
+* Refer to http://www.analog.com/Analog_Root/static/techSupport/designTools/spiceModels/license/spice_general.html for License Statement. Use of this model
+* indicates your acceptance of the terms and provisions in the License Statement.
+*
+* BEGIN Notes:
+*
+* Not Modeled:
+*
+* Parameters modeled include:
+*
+* END Notes
+*
+* Node Assignments
+*		noninverting input
+*		|	inverting input
+*		|	|	 positive supply
+*		|	|	 |	 negative supply
+*		|	|	 |	 |	 output
+*		|	|	 |	 |	 |
+*		|	|	 |	 |	 |
+.SUBCKT AD8542	1	2	99	50	45
+*
+* INPUT STAGE
+*
+M1   4  1 8 8 PIX L=0.6E-6 W=16E-6
+M2   6  7 8 8 PIX L=0.6E-6 W=16E-6
+M3  11  1 10 10 NIX L=0.6E-6 W=16E-6
+M4  12  7 10 10 NIX L=0.6E-6 W=16E-6
+RC1  4 50 20E3
+RC2  6 50 20E3
+RC3 99 11 20E3
+RC4 99 12 20E3
+C1   4  6 1.5E-12
+C2  11 12 1.5E-12
+I1  99  8 1E-5
+I2  10 50 1E-5
+V1  99  9 0.2
+V2  13 50 0.2
+D1   8  9 DX
+D2  13 10 DX
+EOS  7  2 POLY(3) (22,98) (73,98) (81,0) 1E-3 1 1 1
+IOS  1  2 2.5E-12
+*
+* CMRR 64dB, ZERO AT 20kHz
+*
+ECM1 21 98 POLY(2) (1,98) (2,98) 0 .5 .5
+RCM1 21 22 79.6E3
+CCM1 21 22 100E-12
+RCM2 22 98 50
+*
+* PSRR=90dB, ZERO AT 200Hz
+*
+RPS1 70  0 1E6
+RPS2 71  0 1E6
+CPS1 99 70 1E-5
+CPS2 50 71 1E-5
+EPSY 98 72 POLY(2) (70,0) (0,71) 0 1 1
+RPS3 72 73 1.59E6
+CPS3 72 73 500E-12
+RPS4 73 98 25
+*
+* VOLTAGE NOISE REFERENCE OF 35nV/rt(Hz)
+*
+VN1 80 0 0
+RN1 80 0 16.45E-3
+HN  81 0 VN1 35
+RN2 81 0 1
+*
+* INTERNAL VOLTAGE REFERENCE
+*
+VFIX 90 98 DC 1
+S1   90 91 (50,99) VSY_SWITCH
+VSN1 91 92 DC 0
+RSY  92 98 1E3
+EREF 98  0 POLY(2) (99,0) (50,0) 0 .5 .5
+GSY  99 50 POLY(1) (99,50) 0 3.7E-6
+*
+* ADAPTIVE GAIN STAGE
+* AT Vsy>+4.2, AVol=45  V/mv
+* AT Vsy<+3.8, AVol=450 V/mv
+*
+G1  98 30 POLY(2) (4,6) (11,12) 0 2.5E-5 2.5E-5
+VR1 30 31 DC 0
+H1  31 98 POLY(2) VR1 VSN1 0 5.45E6 0 0 49.05E9
+CF  45 30 10E-12
+D3  30 99 DX
+D4  50 30 DX
+*
+* OUTPUT STAGE
+*
+M5  45 46 99 99 POX L=0.6E-6 W=375E-6
+M6  45 47 50 50 NOX L=0.6E-6 W=500E-6
+EG1 99 46 POLY(1) (98,30) 1.05 1
+EG2 47 50 POLY(1) (30,98) 1.04 1
+*
+* MODELS
+*
+.MODEL POX PMOS (LEVEL=2,KP=20E-6,VTO=-1,LAMBDA=0.067)
+.MODEL NOX NMOS (LEVEL=2,KP=20E-6,VTO=1,LAMBDA=0.067)
+.MODEL PIX PMOS (LEVEL=2,KP=20E-6,VTO=-0.7,LAMBDA=0.01,KF=1E-31)
+.MODEL NIX NMOS (LEVEL=2,KP=20E-6,VTO=0.7,LAMBDA=0.01,KF=1E-31)
+.MODEL DX D(IS=1E-14)
+.MODEL VSY_SWITCH VSWITCH(ROFF=100E3,RON=1,VOFF=-4.2,VON=-3.5)
+.ENDS AD8542
+

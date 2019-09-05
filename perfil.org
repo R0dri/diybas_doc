@@ -1,0 +1,185 @@
+#+TITLE: DIY-BAS (Do It Yourself - Bio-signal Adquisition System)
+#+date: agosto 13, 2018
+#+author: rodrigo mendoza
+#+email: rodri.mendoza.t@gmail.com
+
+#+latex_header: \usepackage[margin=3cm,right=2cm]{geometry}
+#+latex_header: \usepackage[T1]{fontenc}
+#+latex_header: \linespread{1.08}
+#+latex_header: \renewcommand*{\contentsname}{índice}
+#+LATEX_CLASS_OPTIONS: [a4paper, 12pt]
+#+LATEX_CLASS: article
+
+\begin{titlepage}
+\begin{center}
+\vspace{2cm}
+{\Large UNIVERSIDAD CATÓLICA BOLIVIANA "SAN PABLO" UNIDAD ACADÉMICA REGIONAL LA PAZ \par}
+{\Medium FACULTAD DE INGENIERÍA \par}
+CARRERA DE INGENIERÍA MECATRÓNICA \par
+
+\vspace{2cm}
+logo \par
+\vspace{2cm}
+{\Large DIYBAS: DO IT YOURSELF BIO-SIGNAL ADQUISITION SYSTEM \par}
+\vspace{1cm}
+{\large Proyecto de grado presentado para la optención del Grado de Ingeniería Mecatrónica \par}
+\vspace{1cm}
+Por: RODRIGO SEBASTIAN MENDOZA TEJADA \par
+\vspace{1.5cm}
+
+
+\vfill
+La Paz-- Bolivia//
+Diciembre, 2018
+\end{titlepage}
+
+* COMMENT Borrador
+** [100%] Introducción
+ La practica de medir bio-señales consiste en medir los distintos impulsos eléctricos que pueda producir un ser vivo. Dichos impulsos eléctricos provienen de las señales eléctricas que utilizan los músculos para sus contracciónes a exepción de las señales eléctricas producidas por el cerebro. Dentro de las señales más comunes son las provenientes del sistema cardiaco (ECG), movimiento intra ocular (EOG), impulsos mioeléctricos o impulsos musculares (EMG) impulsos electro encefalograficos o impulsos cerebrales (EEG). La utilidad de medir las bio-señales se pueden ver desde un ámbito médico de diagnóstico y monitoreo como el monitoréo de presencia de actividad cerebral en pacientes en coma [ref], o como el monitoreo de signos vitales (respiración, ritmo cardiaco) en pacientes internados. En un ámbito menos crítico se puede observar en la asistencia en actividades comunes (ejercicio, entrenamiento fisico, dormir, rehabilitación motora, etc.).
+
+ Todas las bio-señales tienen características en comun lo cual significa que se pueden utilizar métodos similares para la medición de todas las señales; todas las bio-señales pueden ser medidas por medio de electrodos colocados sobre la superficie de piel más cercana a la fuente de origen. Todas presentan grandes niveles de ruido provenientes de varias fuentes como la estática almacenada en la superficie de la piel y pelo, asi como la interferencia de otra bio-señal. Por este motivo, las bio señales son muy dificles de aislar por lo cual un método común de hacerlo es por el uso de amplificadores diferenciales [ref] y en algunos casos conversores análogos digitales del tipo diferencial[ref]. Sin embargo podemos observar que de todas estas, la que presenta mayores dificultades es la EEG ya que la magnitúd de la señal es mucho menor a el resto causando que la relación señal-ruido (SNR) sea muy baja. Una observación importante entonces, es que un dispositivo que sea capáz de medir actividad cerebral, podrá medir el resto de las bioseñales con una reducción en la magnitud de amplificación de señal que debe presentar y un reposicionamiento y cambio del tipo de electrodos[ref].
+
+ Con el avance de la tecnología, esta rama se expandió al medio de la computación en el cual se utilizan las señales EEG como la entrada de interfaces en distintos tipos de sistemas[refs]. Las Interfaces Cerebro-Computador (BCI, /Brain-Computer Interface/) asocian la actividad eléctrica segun la parte del cerebro donde ocurre, los patrones que presenta con intenciones del usuario [ref]. Las interfaces se pueden categorizar segun la cantidad de opciones de categorización; por ejemplo, un sistema BCI de categoria 2 reconoce actividad cerebral motora [MIB] del pie y mano izquierdos y MIB de pie derecho [ref-saho]. La actividad cerebral ocurre en distintos lugares del cerebro simultaneamente _, en el caso de las interfaces MIB se dan en      [ref]_. Es por este motivo que la cantidad de electrodos y la disposición con la que son utilizados influencian en el resultado que se pueda obtener segun el caso de uso[ref]. Esto se debe en gran parte a los artefactos (interferencias de otras bioseñales) que se puedan presentar [ref]. Además, mientras mayor cantidad de electrodos se utilizan, resulta más facil de aislar las fuentes [ref] y por consecuencia, las mismas señales entre sí. Por ejemplo, en el caso de las polisomnografías (PSG) o estudios del sueño, el método de utilizar 18 o más electrodos resulta de gran beneficio [ref]. Debido a este incremento de desempeño, los estándares presentados por la IFCN (Institición F C Neurofisiología) y la ACSN (Sociedad Americana de Neurofisiología) para realizar mediciones EEG indican que se debe hacer el uso mínimo de 24 electrodos, sin embargo los estándares permiten la utilización hasta de 300 electrodos [ref].
+
+** [100%] Planteamiento del problema
+ La EEG es una practica relativamente nueva siendo la primera medición EEG realizada en _tantos por tal fecha_[ref] que, si bien la tecnología en general ha avanzado exponencialmente desde ese entonces, la EEG se encuentra sub-desarrollada en comparación a las otras bioseñales. Existen causas inerentes a la naturaleza de la señal asi como causas practicas. 
+ La tarea de medir ondas cerebrales es particularmente difícil ya que las señales pueden ser tan bajas como los 20µV [ref] por lo cual se requiere una precisión hasta de 0.5µV y el ruido no debe pasar 1.5µV [ref]. Pero la principal dificultad de realizar estas mediciones es que el ruido que puede llegar a estar a magnitudes de 1000 veces más grandes que la señal original. Este ruido puede venir inclusive de otras bioseñales como el EOG, es por eso que se necesita una Taza de Rechazo de Nodo Común (CMMRR) alta, aproximadamente 120db[ref], a modo de combatir los artefactos en conjunto a un circuito DRL (/Driven Right-Leg/) que es esencial en sistemas de adquisición de bioseñales de cualquier tipo[ref].
+ La naturaleza compleja de realizar EEG causa que los dispositivos que permiten realizar mediciones EEG de una manera precisa y con una alta densidad de canales sean de un acceso muy limitado debido al costo, disponibilidad local y soporte. También se puede mencionar que debido a la poca flexibilidad tecnológica, es decir el bajo soporte en dispositivos económicos difícil adquirir un dispositivo que cuente con las últimas tecnologías así como un firmware flexible a las necesidades de las diversas aplicaciones a las cual el dispositivo puede ser visto.
+
+*** Definición del problema
+ Los dispositivos para realizar mediciones y grabar señales EEG de manera precisa y con alta densidad de canales son inaccesibles para investigadores y usuarios finales.
+
+** [100%] Taxonomía de soluciones previas
+*** Open BCI
+
+*** Papers - 32ch Design
+
+*** Modular EEG
+*** EMOTIV EPOC
+
+ Existen varios dispositivos comerciales como los productos de EMOTIV y también OpenBCI. Sin embargo estos productos son bastante caros y con capacidades limitadas. Estos dispositivos ofrecen por lo común hasta 16 canales de electrodos dejando así muy lejos de los mínimos 24 y mucho mas de los deseados 128[3]. Además, mientras mas competentes son los dispositivos, son mas limitados en otros aspectos. Principalmente en la información disponible y las flexibilidades que te presenta.
+
+ Por ejemplo podemos mencionar el proyecto ModularEEG, presenta grandes flexibilidades y muchos foros de ayuda, sin embargo el diseño apenas cumple con la misión de observar señales de EEG. En el caso del OpenBCI, si bien es diseño de código abierto, su utilidad práctica en la flexibilidad electrónica es muy limitada. Eso sin mencionar el elevado costo para la persona común que solamente puede obtener 8 canales. En el caso de EMOTIV podemos mencionar su producto EPOC que con un valor mayor prove 16 canales con una interfaz muy limitada y sujeto a licencias que aumentan el costo. Este es el menos modificable de los 3 dispositivos.
+** [100%] Objetivos
+*** General
+ Crear una alternativa accesible, flexible, potenciable y amigable(facildad de uso) para adquirir y estudiar bio-señales complejas como EEG, ECG, EMG, EOG de manera precisa y confiable.
+*** Específicos
+ - Lograr medir, grabar y visualizar señales EEG, ECG, EOG, EMG de manera digital
+ - Diseñar e implementar un sistema que pueda permitir la medición de hasta 32 canales por medio de la adición de la cantidad de módulos
+ - Crear un diseño que permita el fácil remplazo del ADC, MCU, Amplificadores y filtros
+ - Crear un diseño que permita utilizar distintas fuentes de alimentación fijas y móviles.
+ - Se busca lograr una implementación con protección anti ESD con un diseño galvánicamente aislado en direccion directa e inversa.
+ - Generar instaladores y programas que sean intuitivos; requieran 0 conocimientos de programación para su uso.
+ - Generar una comunidad open source y brindar soporte de desarrollo a la misma
+ -  Validar segun....
+
+** [65%] Justificación
+** [100%] Límites y Alcances
+ Si bien este proyecto apunta a cumplir ciertos niveles de estándares internacionales, no se llevara acabo ningún proceso de certificación. Entre otros límites:
+*** Límites
+ - No se certificará el diseño.
+ - No se evaluara el alcance del proyecto en la comunidad open source.
+ - Solo se implementara la cantidad de uno a dos de los módulos desarrollados.
+ - No se implementaran todos los módulos posibles compatibles para el diseño, se limitara a un tipo específico por módulo.
+*** Alcances
+  1. Accesible
+     - Codigo Abierto, Documentación amplia
+     - Diseño mínimo basico expandible
+  2. Flexible/potenciable
+     - Diseño Modular compatibles con EEG, ECG, EMG, EOG
+       1. Modulos compatibles EEG, ECG, EMG o EOG
+     - Diseño Estado del Arte
+     - Diseño altamente configurable
+     - Diseño escalable
+  3. Facilidad de uso (amigable)
+     - Requerimiento de 0 programación
+     - Ayuda interactiva en la interfaz
+     - Documentación amplia interfaz y componentes
+  4. Seguridad
+     - Proteccion contra descargas ESD al circuito
+     - Proteccion contra descargas desde fuente alimentación
+
+** [100%] (GANT) Cronograma tentativo de actividades
+** [10%] Bibliografía
+** TODO [10%] Sugerencia de Profesor tutor (debe contar con al menos 3 opciones quienes firmaron en la portada de perfil).
+ *Ing, Fabián Pacífico Rojas*: Ingeniero 
+ 1. Fabian Rojas Pacífico
+  Crack analogica, expertice en optica
+ 2. Guillermo Sahonero
+  crack investigación, superviso el desarrollo de proyecto 0
+ 3. Juan Manuel Valverde
+  Sensorica
+
+* Final
+** Introducción
+
+La practica de medir bioseñales consiste en medir los distintos impulsos eléctricos que pueda producir un ser vivo. Dichos impulsos eléctricos provienen de las señales eléctricas que utilizan los músculos para sus contracciones a excepción de las señales eléctricas producidas por el cerebro. Dentro de las señales más comunes son las provenientes del sistema cardiaco (ECG), movimiento intraocular (EOG), impulsos mioeléctricos o impulsos musculares (EMG) impulsos electro encefalográficos o impulsos cerebrales (EEG). La utilidad de medir las bioseñales se pueden ver desde un ámbito médico de diagnóstico y monitoreo como el monitoreo de presencia de actividad cerebral en pacientes en coma [ACNS 2016], o como el monitoreo de signos vitales (respiración, ritmo cardiaco) en pacientes internados. En un ámbito menos crítico se puede observar en la asistencia en actividades comunes (ejercicio, entrenamiento físico, dormir, rehabilitación motora, etc.).
+
+Todas las bioseñales tienen características en común lo cual significa que se pueden utilizar métodos similares para la medición de todas las señales; todas las bioseñales pueden ser medidas por medio de electrodos colocados sobre la superficie de piel más cercana a la fuente de origen. Todas presentan grandes niveles de ruido provenientes de varias fuentes como la estática almacenada en la superficie de la piel y pelo, así como la interferencia de otra bioseñal. Por este motivo, las bioseñales son muy difíciles de aislar por lo cual un método común de hacerlo es por el uso de amplificadores diferenciales [Winter, B. 1983a]. Sin embargo podemos observar que de todas estas, la que pre\senta mayores dificultades es la EEG ya que la magnitud de la señal es mucho menor a el resto causando que la relación señal-ruido (SNR) sea muy baja. Una observación importante entonces, es que un dispositivo que sea capaz de medir actividad cerebral, podrá medir el resto de las bioseñales con una reducción en la magnitud de amplificación de señal que debe presentar y un reposicionamiento y cambio del tipo de electrodos[Mathewson, Kyle E. 2017][Lopez-Gordo, M. 2014][Fiedler, Pa. 2014].
+
+Con el avance de la tecnología, esta rama se expandió al medio de la computación en el cual se utilizan las señales EEG como la entrada de interfaces en distintos tipos de sistemas. Las Interfaces Cerebro-Computador (BCI, Brain-Computer Interface) asocian la actividad eléctrica por los patrones que presenta con intenciones del usuario. Las interfaces se pueden catalogar según la cantidad de opciones de categorización; por ejemplo, un sistema BCI de clase 2 reconoce actividad cerebral motora (MI - Motor Imagery) mano izquierda y MIB de pie/mano derechos [Gandhi, V. 2014]. La actividad cerebral ocurre en distintos lugares del cerebro simultáneamente. Es por este motivo que la cantidad de electrodos y la disposición con la que son utilizados influencian en el resultado que se pueda obtener según el caso de uso[Jurcak, V. 2007]. Esto se debe en gran parte a los artefactos (interferencias de otras bioseñales) que se puedan presentar. Además, mientras mayor cantidad de electrodos se utilizan, resulta más fácil de aislar las fuentes y por consecuencia, las mismas señales entre sí. Por ejemplo, en el caso de las polisomnografías (PSG) o estudios del sueño, el método de utilizar 18 o más electrodos resulta de gran beneficio [Bubrick, El. 2014]. Debido a este incremento de desempeño, los estándares presentados por la IFCN (Federación Internacional de Neurofisiología Clínica) [1999a] y la ACNS (Sociedad Americana de Neurofisiología Clínica)[2016] para realizar mediciones EEG indican que se debe hacer el uso mínimo de 24 electrodos, sin embargo los estándares permiten la utilización hasta de 329 electrodos [Oostenveld and Praamstra, 2001].
+** Planteamiento del problema
+La EEG es una practica relativamente nueva siendo [Jasper 1958]  presentando por primera vez el estándar para la colocación de electrodos para la realización de mediciones EEG. Si bien la tecnología en general ha avanzado exponencialmente desde ese entonces, la EEG se encuentra sub-desarrollada en comparación a las otras bioseñales. Existen causas inherentes a la naturaleza de la señal así como causas practicas. 
+
+La tarea de medir ondas cerebrales es particularmente difícil ya que las señales pueden ser tan bajas como los 20µV por lo cual se requiere una precisión hasta de 0.5µV y el ruido no debe pasar 1.5µV [IFCN 1999b]. Pero la principal dificultad de realizar estas mediciones es que el ruido que puede llegar a estar a magnitudes de 1000 veces más grandes que la señal original. Este ruido puede venir inclusive de otras bioseñales como el EOG, es por eso que se necesita una Taza de Rechazo de Nodo Común (CMMRR) alta, aproximadamente 120db[MettingVanRijn, A. 1994], a modo de combatir los artefactos en conjunto a un circuito DRL (Driven Right-Leg) que es esencial en sistemas de adquisición de bioseñales de cualquier tipo[Winter, B 1983b].
+
+La naturaleza compleja de realizar EEG causa que los dispositivos que cuenten con la  precisa y con una alta densidad de canales sean de un acceso muy limitado debido al costo, disponibilidad local y soporte. También se puede mencionar que debido a la poca variedad causan que el costo no pueda ser reducido al seleccionar cuidadosamente un dispositivo para una aplicación específica. Por otro lado los dispositivos que son mas potentes tienden a ser menos configurares y con una compatibilidad más limitada en software y hardware. Además, los dispositivos cuentan con el hardware necesario para poder medir otros tipos de bioseñales, sin embargo pocos dispositivos implementan la flexibilidad necesaria para poder realizar estas mediciones. Esta falta de flexibilidad en los dispositivos mas potentes se observa en el firmware, software, el manejo de datos y en el hardware.
+
+** Taxonomía de soluciones previas
+Existen varios dispositivos comerciales como los productos de EMOTIV y también OpenBCI. Sin embargo estos productos son bastante caros y con capacidades limitadas. Estos dispositivos ofrecen hasta 14 canales de electrodos en el rango de dispositivos menor a 1’000USD. dejando así muy lejos de los mínimos 24 y mucho mas de los deseados 32 [IFCN 1999c]. Además, mientras mas competentes son los dispositivos, son mas limitados en otros aspectos. Principalmente en la información disponible y las flexibilidades que te presenta.
+
+Por ejemplo podemos mencionar el proyecto ModularEEG, presenta grandes flexibilidades y muchos foros de ayuda, sin embargo el diseño apenas cumple con la misión de observar señales de EEG. En el caso del OpenBCI, si bien es diseño de código abierto, su utilidad práctica en la flexibilidad electrónica es muy limitada. Eso sin mencionar el elevado costo para la persona común que solamente puede obtener 8 canales. En el caso de EMOTIV podemos mencionar su producto EPOC que con un valor mayor provee 14 canales con una interfaz muy limitada y sujeto a licencias que aumentan el costo. Este es el menos modificable de los 3 dispositivos.
+
+|             | Open BCI | EMOTIV EPOC | Modular EEG | Ref. Papers |
+|-------------+----------+-------------+-------------+-------------|
+| Costo (USD) |          |             |             |             |
+|             |          |             |             |             |
+|             |          |             |             |             |
+|             |          |             |             |             |
+|             |          |             |             |             |
+|             |          |             |             |             |
+
+
+Cabe mencionar todos los proyectos desarrollados como artículos de investigación que son mas potentes que los mencionados anteriormente. Sin embargo no son productos comerciales ni proveen el diseño completo con documentación que permitan replicar el dispositivo con facilidad. Como consecuencia, estos dispositivos no realizan un aporte efectivo para el usuario final e investigadores que requieren el dispositivo como medio y no como fin. Se compiló la información de las soluciones antes mencionadas en la tabla 1 presentando la comparativa de ventajas y beneficios que propone cada s
+** Objetivos
+*** Objetivo General
+*** Objetivos Específicos
+** Justificación
+** Límites y Alcances
+*** Límites
+*** Alcances
+1. 
+   - 
+   - 
+2. 
+   -
+   - 
+   - 
+3. 
+   - 
+   - 
+4. 
+   - 
+   - 
+** Cronograma tentativo de actividades
+** Bibliografía
+** Sugerencia de Profesor tutor (debe contar con al menos 3 opciones quienes firmaron en la portada de perfil).
+* COMMENT Outline
+* Taxonomía soluciones previas
+** DONE costo
+   CLOSED: [2019-01-09 Wed 02:26]
+** DONE Disponibilidda
+   CLOSED: [2019-01-09 Wed 02:26]
+** DONE Presición
+   CLOSED: [2019-01-09 Wed 02:26]
+** DONE Multiples bioseñales
+   CLOSED: [2019-01-09 Wed 02:27]
+** DONE Limitacion canales numericamente hablando
+   CLOSED: [2018-01-09 Tue 04:55]
+** DONE Freq Muestreo
+   CLOSED: [2019-01-10 Thu 04:55]
+** *Facilidad de uso*
+** *Flex/compatibilidad externa*
+*** TODO infomracion/flexibilidad
+*** TODO Soft/firm ACtualizacion
+*** TODO Flex / limitacion desarrollo

@@ -1,0 +1,326 @@
+* AC Analysis, 600E-3 highPass, 4th order Butterworth, 2 stages using AD8602
+
+* Input signal for AC and transient sinusoidal analysis
+VIN IN 0 AC 1 DC 2.5 SIN(2.5 1.75 16E-3)
+* VIN IN 0 AC 1 DC 2.5 SIN(2.5 1.73 10)
+* VNOISE IN 0 AC 0 DC 2.5
+
+XA IN   OUTA VCCG VEEG VREF sallenKeyhighPassStageA
+XB OUTA OUTB VCCG VEEG VREF sallenKeyhighPassStageB
+XC OUTB OUTC VCCG VEEG VREF multipleFeedbacklowPassStageA
+XD OUTC OUTD VCCG VEEG VREF multipleFeedbacklowPassStageB
+XE OUTD OUT  VCCG VNEG 0    Notch
+
+VP VCCG 0 5
+VM VEEG 0 0
+VN VNEG 0 -5
+VR VREF 0 2.5
+
+*Simulation directive lines for AC Analysis
+.AC DEC 100 16E-3 10E3
+*.TRAN 1ns 6.59
+*.NOISE V(OUT) VNOISE DEC 100 16E-3 10E3
+.PROBE
+
+
+
+.SUBCKT DRL IN OUT VCC VEE VGND
+X1 IN OUT VCC VEE OUT TLV2401
+R1 200
+.ENDS DRL
+
+.SUBCKT eRef IN OUT VCC VEE VGND
+X1 IN OUT VCC VEE OUT TLV2401
+.ENDS eRef
+
+.SUBCKT sallenKeyhighPassStageA IN OUT VCC VEE REF
+X1 INP OUT VCC VEE OUT AD8602
+C1 IN 1 270E-9
+C2 1 INP 270E-9
+R1 1 OUT 376E3
+R2 INP REF 2.57E6
+.ENDS sallenKeyhighPassStageA
+
+.SUBCKT sallenKeyhighPassStageB IN OUT VCC VEE REF
+X1 INP OUT VCC VEE OUT AD8602
+C1 IN 1 270E-9
+C2 1 INP 270E-9
+R1 1 OUT 908E3
+R2 INP REF 1.06E6
+.ENDS sallenKeyhighPassStageB
+
+.SUBCKT Notch IN OUT VCC VEE GND
+* X1 INP OUT VCC VEE OUT TLV2401
+X1    GND 5 VCC VEE 6   TLV2401
+X2    GND 7 VCC VEE 8   TLV2401
+X3    9 OUT VCC VEE OUT TLV2401
+C1   8 7   1U
+C2   9 IN  1U
+R1   IN 5  10K
+R2   5 6   10K
+R3   7 6   2.49K
+R4   7 OUT 2.49K
+R5   8 9   4.02K
+R6   0 9   200K
+.ENDS Notch
+
+.SUBCKT multipleFeedbacklowPassStageA IN OUT VCC VEE REF
+X1 REF INM VCC VEE OUT AD8542
+R1 IN 1  2.77E3
+R2 1 INM 1.38E3
+R5 1 OUT 2.77E3
+C1 1 REF 3E-6
+C2 INM OUT 220E-9
+.ENDS multipleFeedbacklowPassStageA
+
+.SUBCKT multipleFeedbacklowPassStageB IN OUT VCC VEE REF
+X1 REF INM VCC VEE OUT AD8542
+R1 IN 1  42E3
+R2 1 INM 21E3
+R5 1 OUT 42E3
+C1 1 REF 82E-9
+C2 INM OUT 35E-9
+.ENDS multipleFeedbacklowPassStageB
+
+
+
+
+
+
+* TLV240X_5V operational amplifier "macromodel" subcircuit
+* created using Parts release 8.0 on 11/08/99 at 07:55
+* Parts is a MicroSim product.
+*
+* connections:     non-inverting input
+*                  | inverting input
+*                  | | positive power supply
+*                  | | | negative power supply
+*                  | | | | output
+*                  | | | | |
+.subckt TLV2401  1 2 3 4 5
+*
+  c1   11 12 9.8944E-12
+  c2    6  7 30.000E-12
+  cee  10 99 8.8738E-12
+  dc    5 53 dy
+  de   54  5 dy
+  dlp  90 91 dx
+  dln  92 90 dx
+  dp    4  3 dx
+  egnd 99  0 poly(2) (3,0) (4,0) 0 .5 .5
+  fb    7 99 poly(5) vb vc ve vlp vln 0 61.404E6 -1E3 1E3 61E6 -61E6
+  ga    6  0 11 12 1.0216E-6
+  gcm   0  6 10 99 10.216E-12
+  iee  10  4 dc 54.540E-9
+  ioff 0 6 dc 5e-12
+  hlim 90  0 vlim 1K
+  q1   11  2 13 qx1
+  q2   12  1 14 qx2
+  r2    6  9 100.00E3
+  rc1   3 11 978.81E3
+  rc2   3 12 978.81E3
+  re1  13 10 30.364E3
+  re2  14 10 30.364E3
+  ree  10 99 3.6670E9
+  ro1   8  5 10
+  ro2   7 99 10
+  rp    3  4 1.4183E6
+  vb    9  0 dc 0
+  vc    3 53 dc .88315
+  ve   54  4 dc .88315
+  vlim  7  8 dc 0
+  vlp  91  0 dc 540
+  vln   0 92 dc 540
+.model dx D(Is=800.00E-18)
+.model dy D(Is=800.00E-18 Rs=1m Cjo=10p)
+.model qx1 NPN(Is=800.00E-18 Bf=27.270E21)
+.model qx2 NPN(Is=800.0000E-18 Bf=27.270E21)
+.ends
+* $
+
+* AD8602 SPICE Macro-model Typical Values
+* Description: Amplifier
+* Generic Desc: 2.7/5V, CMOS, OP, Low Vos, RRIO, 2X
+* Developed by: OEB / ADSC
+* Revision History: 08/10/2012 - Updated to new header style
+* 1.0 (03/2000)
+* Copyright 1999, 2012 by Analog Devices
+*
+* Refer to http://www.analog.com/Analog_Root/static/techSupport/designTools/spiceModels/license/spice_general.html for License Statement. Use of this model
+* indicates your acceptance of the terms and provisions in the License Statement.
+*
+* BEGIN Notes:
+*
+* Not Modeled:
+*
+* Parameters modeled include:
+*
+* END Notes
+*
+* Node Assignments
+*			noninverting input
+*			|	inverting input
+*			|	|	 positive supply
+*			|	|	 |	 negative supply
+*			|	|	 |	 |	 output
+*			|	|	 |	 |	 |
+*			|	|	 |	 |	 |
+.SUBCKT AD8602 		1       2       99      50      45
+*
+* INPUT STAGE
+*
+M1  14  7  8  8 PIX L=1E-6 W=982E-6
+M2  16  2  8  8 PIX L=1E-6 W=982E-6
+M3  17  7 10 10 NIX L=1E-6 W=982E-6
+M4  18  2 10 10 NIX L=1E-6 W=982E-6
+RC5 14 50 4E+3
+RC6 16 50 4E+3
+RC7 99 17 4E+3
+RC8 99 18 4E+3
+C1  14 16 0.6E-12
+C2  17 18 0.6E-12
+I1  99  8 100E-6
+I2  10 50 100E-6
+V1  99  9 0.3
+V2  13 50 0.3
+D1   8  9 DX
+D2  13 10 DX
+EOS  7  1 POLY(3) (22,98) (73,98) (81,98) 300E-6 1 1 1
+IOS  1  2 2.5E-12
+*
+* CMRR 90dB, ZERO AT 15kHz, POLE AT 2MHz
+*
+ECM1 21 98 POLY(2) (1,98) (2,98) 0 0.5 0.5
+CCM1 21 22 3.54E-10
+RCM1 21 22 30000
+RCM2 22 98 1
+*
+* PSRR=100dB, ZERO AT 300Hz
+*
+EPSY 98 72 POLY(1) (99,50) 0 1
+CPS3 72 73 5.30E-9
+RPS3 72 73 100E+3
+RPS4 73 98 1
+*
+*
+* VOLTAGE NOISE REFERENCE OF 33nV/rt(Hz)
+*
+VN1 80 98 0
+RN1 80 98 16.45E-3
+HN  81 98 VN1 33
+RN2 81 98 1
+*
+* INTERNAL VOLTAGE REFERENCE
+*
+EREF 98  0 POLY(2) (99,0) (50,0) 0 .5 .5
+GSY  99 50 (99,50) 48E-6
+EVP  97 98 POLY(1) (99,50) -0.6 0.5
+EVN  51 98 POLY(1) (50,99) 0.6 0.5
+*
+* GAIN STAGE
+*
+G1 98 30 POLY(2) (14,16) (17,18) 0 375E-6 375E-6
+R1 30 98 2.53E+6
+CF 45 30 50E-12
+D3 30 97 DX
+D4 51 30 DX
+*
+* OUTPUT STAGE
+*
+M5  45 46 99 99 POX L=1E-6 W=1.6E-3
+M6  45 47 50 50 NOX L=1E-6 W=3.33E-3
+EG1 99 46 POLY(1) (98,30) 0.5216 1
+EG2 47 50 POLY(1) (30,98) 0.4622 1
+*
+* MODELS
+*
+.MODEL POX PMOS (LEVEL=2,KP=10E-6,VTO=-0.328,LAMBDA=0.01,RD=0)
+.MODEL NOX NMOS (LEVEL=2,KP=10E-6,VTO=+0.328,LAMBDA=0.01,RD=0)
+.MODEL PIX PMOS (LEVEL=2,KP=10E-6,VTO=-0.328,LAMBDA=0.01,KF=2.5E-31,AF=1,TOX=100E-3)
+.MODEL NIX NMOS (LEVEL=2,KP=10E-6,VTO=+0.328,LAMBDA=0.01,KF=2.5E-31,AF=1,TOX=100E-3)
+.MODEL DX D(IS=1E-14,RS=5)
+.ENDS AD8602
+*
+*$
+
+
+
+* AD8542 SPICE Macro-model Typical Values
+* Description: Amplifier
+* Generic Desc: 2.7/5V, CMOS, OP, Low Pwr, RRIO, 2X
+* Developed by: TAM / ADSC
+* Revision History: 08/10/2012 - Updated to new header style
+* 1.0 (06/1998)
+* Copyright 1998, 2012 by Analog Devices
+*
+* Refer to http://www.analog.com/Analog_Root/static/techSupport/designTools/spiceModels/license/spice_general.html for License Statement. Use of this model
+* indicates your acceptance of the terms and provisions in the License Statement.
+*
+* BEGIN Notes:
+*
+* Not Modeled:
+*
+* Parameters modeled include:
+*
+* END Notes
+*
+* Node Assignments
+*		noninverting input
+*		|	inverting input
+*		|	|	 positive supply
+*		|	|	 |	 negative supply
+*		|	|	 |	 |	 output
+*		|	|	 |	 |	 |
+*		|	|	 |	 |	 |
+.SUBCKT AD8542	1	2	99	50	45
+*
+* INPUT STAGE
+*
+M1   4  1 8 8 PIX L=0.6E-6 W=16E-6
+M2   6  7 8 8 PIX L=0.6E-6 W=16E-6
+M3  11  1 10 10 NIX L=0.6E-6 W=16E-6
+M4  12  7 10 10 NIX L=0.6E-6 W=16E-6
+RC1  4 50 20E3
+RC2  6 50 20E3
+RC3 99 11 20E3
+RC4 99 12 20E3
+C1   4  6 1.5E-12
+C2  11 12 1.5E-12
+I1  99  8 1E-5
+I2  10 50 1E-5
+V1  99  9 0.2
+V2  13 50 0.2
+D1   8  9 DX
+D2  13 10 DX
+EOS  7  2 POLY(3) (22,98) (73,98) (81,0) 1E-3 1 1 1
+IOS  1  2 2.5E-12
+*
+* CMRR 64dB, ZERO AT 20kHz
+*
+ECM1 21 98 POLY(2) (1,98) (2,98) 0 .5 .5
+RCM1 21 22 79.6E3
+CCM1 21 22 100E-12
+RCM2 22 98 50
+*
+* PSRR=90dB, ZERO AT 200Hz
+*
+RPS1 70  0 1E6
+RPS2 71  0 1E6
+CPS1 99 70 1E-5
+CPS2 50 71 1E-5
+EPSY 98 72 POLY(2) (70,0) (0,71) 0 1 1
+RPS3 72 73 1.59E6
+CPS3 72 73 500E-12
+RPS4 73 98 25
+*
+* VOLTAGE NOISE REFERENCE OF 35nV/rt(Hz)
+*
+VN1 80 0 0
+RN1 80 0 16.45E-3
+HN  81 0 VN1 35
+RN2 81 0 1
+*
+* INTERNAL VOLTAGE REFERENCE
+*
+VFIX 90 98 DC 1
+S1   90 91 (50,99) VSY_SWITCH

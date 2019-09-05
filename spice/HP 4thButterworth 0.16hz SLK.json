@@ -1,0 +1,69 @@
+{
+	"Name": "HP 4thButterworth 0.16hz SLK",
+	"Description": "HP 4thButterworth 0.16hz SLK",
+	"Tool": "FW",
+	"Version": "1.1",
+	"Design": {
+		"visitedTabs": [
+			"filter-type",
+			"specifications",
+			"components",
+			"tolerances",
+			"next-steps"
+		],
+		"filterType": "highPass",
+		"specifications": {
+			"gain": 0,
+			"gainUnit": "dB",
+			"passbandAttenuation": -3,
+			"passbandFrequency": 0.6,
+			"stopbandAttenuation": -40,
+			"stopbandFrequency": 0.16,
+			"filterResponseValue": 0,
+			"filterResponseSlider": 50,
+			"centerFrequency": null
+		},
+		"components": {
+			"vsPlus": 5,
+			"vsMinus": 0,
+			"optimization": "RecommendedSpecificComponents",
+			"optimizationPreference": "specific",
+			"compensateForGbw": true,
+			"stages": [
+				{
+					"stageLetter": "A",
+					"componentSizing": 130,
+					"gain": -1,
+					"gainEnabled": false,
+					"implementation": "sallenKey",
+					"opAmps": "AD8602"
+				},
+				{
+					"stageLetter": "B",
+					"componentSizing": 130,
+					"gain": -1,
+					"gainEnabled": false,
+					"implementation": "sallenKey",
+					"opAmps": "LTC2064"
+				}
+			],
+			"recommendedAmps": [],
+			"sortOrder": [
+				0,
+				1
+			]
+		},
+		"tolerances": {
+			"resistorTolerance": "1%",
+			"capacitorTolerance": "5%",
+			"inductorTolerance": "5%",
+			"opAmpGbwTolerance": "20%",
+			"resistorPreferredSeries": "E96",
+			"capacitorPreferredSeries": "E24",
+			"inductorPreferredSeries": "E12"
+		},
+		"nextSteps": {}
+	},
+	"CreatedDate": "2019-08-28 05:19:05 PM",
+	"UpdatedDate": "2019-08-28 05:19:05 PM"
+}

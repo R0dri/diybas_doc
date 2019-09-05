@@ -1,0 +1,49 @@
+WEBENCH_DESIGN_4928233_2_PSPICE (PSpice format)
+**************************************
+**  This file was created by TINA   **
+**         www.tina.com             ** 
+**      (c) DesignSoft, Inc.        **          
+**     www.designsoftware.com       **
+**************************************
+.LIB "C:\Program Files (x86)\DesignSoft\Tina 9 - TI\EXAMPLES\SPICE\TSPICE.LIB"
+.LIB "C:\Program Files (x86)\DesignSoft\Tina 9 - TI\SPICELIB\Operational Amplifiers.LIB"
+.LIB
+.TEMP 27
+.AC DEC 10884 1.5625 1.6K
+.TRAN 2N 1U
+.DC LIN Vsignal 0 1 10M
+
+.OPTIONS CHGTOL=10F ITL1=1000 ITL2=40 ITL4=20 TRTOL=14 
+.PROBE V([VOut])
+
+Vsignal     3 0 DC 0 AC 1 0
++ SIN( 0 1 1K 0 0 0 )
+Vcc         26 0 5
+Vee         27 0 -5
+XA1_S1      0 5 26 27 6 MAIN_BLOCK_CIRCUIT_FILTER_STAGE_1_SIM_A1_S1_WB_AMPLIFIER
+XA2_S1      0 7 26 27 8 MAIN_BLOCK_CIRCUIT_FILTER_STAGE_1_SIM_A2_S1_WB_AMPLIFIER
+XA3_S1 9 VOut 26 27 VOut 
++ MAIN_BLOCK_CIRCUIT_FILTER_STAGE_1_SIM_A3_S1_WB_AMPLIFIER_MIRRORED 
+C1_S1       8 7 1U 
+C2_S1       9 3 1U 
+R1_S1       3 5 10K 
+R2_S1       5 6 10K 
+R3_S1       7 6 2.49K 
+R4_S1       7 VOut 2.49K 
+R5_S1       8 9 4.02K 
+R6_S1       0 9 200K 
+
+
+.LIB "C:\Program Files (x86)\DesignSoft\Tina 9 - TI"
+* SUBCKT: MAIN_BLOCK_CIRCUIT_FILTER_STAGE_1_SIM_A1_S1_WB_AMPLIFIER encrypted macro, content not displayed
+
+
+.LIB "C:\Program Files (x86)\DesignSoft\Tina 9 - TI"
+* SUBCKT: MAIN_BLOCK_CIRCUIT_FILTER_STAGE_1_SIM_A2_S1_WB_AMPLIFIER encrypted macro, content not displayed
+
+
+.LIB "C:\Program Files (x86)\DesignSoft\Tina 9 - TI"
+* SUBCKT: MAIN_BLOCK_CIRCUIT_FILTER_STAGE_1_SIM_A3_S1_WB_AMPLIFIER_MIRRORED encrypted macro, content not displayed
+
+
+.END

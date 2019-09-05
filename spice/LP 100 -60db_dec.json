@@ -1,0 +1,69 @@
+{
+	"Name": "LP 100 -60db/dec",
+	"Description": "Butterworth MFB for nyquist. cheap op amp ~= 0.4 usd",
+	"Tool": "FW",
+	"Version": "1.1",
+	"Design": {
+		"visitedTabs": [
+			"filter-type",
+			"specifications",
+			"components",
+			"tolerances",
+			"next-steps"
+		],
+		"filterType": "lowPass",
+		"specifications": {
+			"gain": 0,
+			"gainUnit": "dB",
+			"passbandAttenuation": -3,
+			"passbandFrequency": 100,
+			"stopbandAttenuation": -60,
+			"stopbandFrequency": 1000,
+			"filterResponseValue": 0,
+			"filterResponseSlider": "49",
+			"centerFrequency": null
+		},
+		"components": {
+			"vsPlus": 5,
+			"vsMinus": 0,
+			"optimization": "RecommendedSpecificComponents",
+			"optimizationPreference": "specific",
+			"compensateForGbw": true,
+			"stages": [
+				{
+					"stageLetter": "A",
+					"componentSizing": 128,
+					"gain": -1,
+					"gainEnabled": false,
+					"implementation": "multipleFeedback",
+					"opAmps": "AD8542"
+				},
+				{
+					"stageLetter": "B",
+					"componentSizing": 109,
+					"gain": -1,
+					"gainEnabled": false,
+					"implementation": "multipleFeedback",
+					"opAmps": "LTC2064"
+				}
+			],
+			"recommendedAmps": [],
+			"sortOrder": [
+				0,
+				1
+			]
+		},
+		"tolerances": {
+			"resistorTolerance": "1%",
+			"capacitorTolerance": "5%",
+			"inductorTolerance": "5%",
+			"opAmpGbwTolerance": "20%",
+			"resistorPreferredSeries": "E96",
+			"capacitorPreferredSeries": "E24",
+			"inductorPreferredSeries": "E12"
+		},
+		"nextSteps": {}
+	},
+	"CreatedDate": "2019-08-28 04:13:11 PM",
+	"UpdatedDate": "2019-08-28 04:13:11 PM"
+}
