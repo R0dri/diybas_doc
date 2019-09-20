@@ -1,0 +1,62 @@
+* Signals Generation, EEG input sources simulation
+*********************
+* Signal Generation *
+*********************
+**Original Signal
+Vino signal 0 SINE(2.5 100u 20)
+
+**Adding common noise sources
+V5     V50    0 AC 1 DC 0 SIN(0 0.1 50)
+Vdc    VDC    V50 SIN(1 0.5 0.1)
+Vnoise VNoise VDC SIN(1 0.05 1k)
+Vcm    VCM VNoise SIN(1 0.025 10k)
+**Simulating Channels
+
+Vbase  base   VCM SIN(0 100u 20)
+vbs bas VCM signal
+Vartf  artf  base SIN(0 100u 88)
+
+VsH VH 0  DC 0  AC 2 sin(2 1 20)
+VsI VI VCM   sin(1 100u 20)
+VsN VN 0     sin(2 1 50)
+VsL VL 0     sin(2 1 200)
+
+Vin IN VGND  DC 0 AC 0 sin(1 100u 20)
+
+
+
+*** Conditions ***
+*.TEMP 27
+*.OPTIONS CHGTOL=10F ITL1=1000 ITL2=40 ITL4=20 TRTOL=14
+
+*** Type ***
+* .AC DEC 100 16E-4 10E6
+* .TRAN 50us 1s
+.TRAN 10ms 1s
+* .NOISE V(OUT) VNOISE DEC 100 16E-3 10E3
+.PWL IN
+
+* .PROBE V(REF) V(VDRL)
+* .PROBE V(v50) V(vdc) V(vnoise)
+* .PROBE V(vcm) V(base) V(artf)
+* .PROBE V(outh) V(out) V(outn) V(outc)
+
+
+
+*************
+* Libraries *
+*************
+.lib ADI1.lib
+
+
+
+****************************
+* Subcomponent Definitions *
+****************************
+
+.SUBCKT INA IN+ OUT VCC VEE VREF IN-
+*AD8422 IN- RG- RG+ IN+ -Vs   REF  VOUT  +Vs
+XAD     IN- N2  N3  IN+  VEE VREF   OUT   VCC  AD8422
+* Gain
+R1 N2 N3 2.21K
+.ENDS INA

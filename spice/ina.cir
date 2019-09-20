@@ -1,0 +1,61 @@
+* AC Analysis, 600E-3 highPass, 4th order Butterworth, 2 stages using AD8602
+* Input signal for AC and transient sinusoidal analysis
+* VIN IN V_GND AC 1 DC 2.5 SIN(2.5 1.75 16E-3)
+* VIN  IN   0 AC 1 DC 0 SIN(0 1.25 20)
+* VREF IREF 0 AC 1 DC 0 SIN(2.5 0.01 50)
+* * VIN IN 0 AC 1 DC 2.5 SIN(2.5 1.73 10)
+* VNOISE IN 0 AC 0 DC 2.5
+
+* Single ended power supply with Virtual ground at 2.5v
+VP VCCG 0 5
+VR VGND 0 2.5
+VM VEEG 0 0
+
+* Noise and patient simulation
+V5 V50 0 AC 1 DC 0 SIN(0 0.1 50)
+Vdc VDC V50 SIN(1 0.4 1)
+Vcm VNoise VDC SIN(1 0.05 1k)
+Vcm1 VCM VNoise SIN(1 0.025 10k)
+Vcm2 VCM2 VCM 0.1
+
+
+Vino signal 0 SINE(2.5 100u 20)
+
+Vin1 source1 VCM SINE(0 100u 20)
+Vin2 source2 VCM2 SINE(0 100u 18)
+Vin3 artifact source2 SINE(0 100u 88)
+
+
+XD source1 VCM VCCG VEEG VGND OUT_C1 INA
+XR source2 VCM VCCG VEEG VGND OUT_C2 INA
+XA artifact VCM VCCG VEEG VGND OUT_C3 INA
+Rload1 OUT_C1 0 10K
+Rload2 OUT_C2 0 10K
+Rload3 OUT_C3 0 10K
+
+
+
+
+
+*Simulation directive lines for AC Analysis
+* .TEMP 27
+* .AC DEC 100 16E-3 10E6
+* .TRAN 50us 0.5
+.TRAN 1
+*.NOISE V(OUT) VNOISE DEC 100 16E-3 10E3
+* .OPTIONS CHGTOL=10F ITL1=1000 ITL2=40 ITL4=20 TRTOL=14
+.PROBE V(signal)
+.PROBE V(out_c1) V(out_c2) V(out_c3)
+.PROBE V(source1) V(source2) V(artifact)
+* .PLOT(signal)
+.lib ADI1.lib
+
+
+
+
+.SUBCKT INA IN+ IN- VCC VEE VREF OUT
+*AD8422 IN- RG- RG+ IN+ -Vs   REF  VOUT  +Vs
+XAD     IN- N2  N3  IN+  VEE VREF   OUT   VCC  AD8422
+* Gain setter
+R1 N2 N3 2.21K
+.ENDS INA

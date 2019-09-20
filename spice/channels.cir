@@ -7,21 +7,73 @@ VP VCCG 0 5
 VR VGND 0 2.5
 VM VEEG 0 0
 
-*****************
-* Import Signals *
-*****************
-Vtest testi 0 PWL (file=filters.txt)
+*********************
+* Signal Generation *
+*********************
+**Original Signal
+Vino signal 0 SINE(2.5 100u 20)
 
-***********
-* Modulos *
-***********
-*    in  out            +5v   0v  2.5v
-XH   IN  OUTH           VCCG VEEG VGND HPfilter
-* XC   OUTH  OUTC       VCM VCCG VEEG VGND INA
-* XN   IN  OUTN           VCCG VEEG VGND Notch_50
-XA   IN  OUT            VCCG VEEG VGND LPfilter
-* XR  VCM  REF    VCCG VEEG REF_BUFFER
-* xd  ref   vdrl   vccg veeg vgnd drl
+**Adding common noise sources
+V5     V50 0 AC 1 DC 0 SIN(0 0.1 50)
+Vdc    VDC V50 SIN(1 0.5 0.1)
+Vnoise VNoise VDC SIN(1 0.05 1k)
+Vcm   VCM VNoise SIN(1 0.025 10k)
+
+
+******************************
+* Simulation directive lines *
+******************************
+
+**Simulating different impedances
+* Vcm1 VCM1 VCM 0.1
+* Vcm2 VCM2 VCM 0.05
+* Vcm3 VCM3 VCM -0.05
+
+**Simulating Channels
+Vbase     base       VCM        SINE(0 100u 20)
+* Vin1      source1    VCM1       SINE(0 100u 20)
+* Vin2      source2    VCM2       SINE(0 100u 20)
+* Vin3      source3    VCM3       SINE(0 100u 20)
+* Vin4      artifact   source2    SINE(0 100u 88)
+
+*************************
+* DRL/Guard & Reference *
+*************************
+*   in    out    +5v  -5v  2.5v
+* XR  IREF  REF    VCCG VEEG REF_BUFFER
+* XD  REF   VDRL   VCCG VEEG VGND DRL
+
+
+
+
+
+************
+* Channels *
+************
+XC1 base    OUT_C1      VCM VCCG VEEG VGND  channel
+* XC2 source2    OUT_C2      VCM VCCG VEEG VGND  channel
+* XC3 source3    OUT_C3      VCM VCCG VEEG VGND  channel
+* XC4 artifact   OUT_C4      VCM VCCG VEEG VGND  channel
+
+* Xina1 source1    OUT_Ci1      VCM VCCG VEEG VGND  ina
+* Xina2 source2    OUT_Ci2      VCM VCCG VEEG VGND  ina
+* Xina3 source3    OUT_Ci3      VCM VCCG VEEG VGND  ina
+* Xina4 artifact   OUT_Ci4      VCM VCCG VEEG VGND  ina
+
+
+
+*********************************
+* Single Channel Base Structure *
+*********************************
+.SUBCKT channel IN OUT VCM VCC VEE VGND
+*    In     Out            +5v   0V  2.5V
+XH   IN     OUTH           VCC  VEE  VGND HPfilter
+XC   OUTH   OUTC       VCM VCC  VEE  VGND INA
+* XN   OUTC   OUTN           VCC  VEE  VGND Notch_50
+XA   OUTC   OUT            VCC  VEE  VGND LPfilter
+* XA   OUTC   OUT            VCC  VEE  VGND LPfilter
+.ENDS channel
+
 
 
 
@@ -30,16 +82,16 @@ XA   IN  OUT            VCCG VEEG VGND LPfilter
 *.OPTIONS CHGTOL=10F ITL1=1000 ITL2=40 ITL4=20 TRTOL=14
 
 *** Type ***
-* .AC DEC 100 16E-4 10E6
+* .AC DEC 100 16E-3 10E6
 * .TRAN 50us 1s
-.TRAN 10ms 0.5s
+.TRAN 0.2s
 * .NOISE V(OUT) VNOISE DEC 100 16E-3 10E3
-.PWL IN
 
-* .PROBE V(REF) V(VDRL)
-* .PROBE V(v50) V(vdc) V(vnoise)
-* .PROBE V(vcm) V(base) V(artf)
-* .PROBE V(outh) V(out) V(outn) V(outc)
+.PROBE V(out) V(REF) V(VDRL)
+.PROBE V(signal)
+.PROBE V(out_c1) V(out_c2) V(out_c3)
+.PROBE V(out_ci1) V(out_ci2) V(out_ci3)
+.PROBE V(source1) V(source2) V(artifact)
 
 
 
