@@ -1,0 +1,72 @@
+
+
+\input{EncabezadoTesisMSc}
+
+\usepackage{titlesec} 
+\renewcommand{\tablename}\{\textbf{Tabla}\}
+\renewcommand{\figurename}\{\textbf{Figura}\}
+\renewcommand{\listtablename}{Lista de Tablas}
+\renewcommand{\listfigurename}{Lista de Figuras}
+\renewcommand{\labelitemi}{$\bullet$}
+\titleformat{\chapter}[display]
+\{\bfseries\Large\}
+\{\filright\MakeUppercase{\chaptertitlename} \Huge\thechapter\}
+\{1ex\}
+\{\titlerule\vspace{1ex}\filleft\}
+[\vspace{1ex}\titlerule]
+
+
+
+\begin{document}
+
+
+\pagenumbering{roman}
+\include{HojaTitulo/HojaTituloMSc}
+
+\renewcommand{\contentsname}\{\textbf{\LARGE \'Indice}\}
+
+\include{Tab_Simbolos/TabSimbolosMSc}
+
+\tableofcontents
+\listoffigures
+
+\listoftables
+\newpage
+\pagenumbering{arabic}
+\include{Kap1/Kap1}
+\include{Kap2/Kap2}
+\include{Kap3/Kap3}
+\include{Kap4/Kap4}
+
+\section{Marco Referencial}
+\label{sec:orga0a55a0}
+\section{Marco teórico}
+\label{sec:orgd48739a}
+\subsection{Estado del arte [obj especificos]}
+\label{sec:org213453c}
+\subsubsection{Neurosky}
+\label{sec:org132391a}
+\subsubsection{Tecnico}
+\label{sec:orgca7b496}
+\subsubsection{Modular}
+\label{sec:org3bc9b09}
+\subsection{Fundamentos}
+\label{sec:org8b0323f}
+\subsubsection{siencia investigada para desarrollar}
+\label{sec:orgc8c9f62}
+\subsubsection{ADCS}
+\label{sec:org9985f74}
+\subsubsection{Impedancia - aplicado}
+\label{sec:orgd8cf818}
+\subsubsection{NO EXPLICAR Q ES BODE}
+\label{sec:orgbd8b0ad}
+\subsubsection{EXPLICAR ANCHO DE BANDA}
+\label{sec:org8eeeac5}
+
+
+\addcontentsline{toc}{chapter}\{\numberline{}Bibliograf$\backslash$'\{\i\}a\}
+\bibliographystyle{plaindin_esp}
+\bibliography{BibliMSc}
+\include{Anexos/Anexos}
+
+\end{document}

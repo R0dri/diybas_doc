@@ -1,0 +1,832 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=prv_TesisMSc 2019.9.26)  26 SEP 2019 12:39
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**&prv_TesisMSc /AUCTEXINPUT{ _region_.tex }
+(./_region_.tex
+
+LaTeX Warning: Unused global option(s):
+    [pagesize].
+
+No file _region_.aux.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+(/Users/rodri/.emacs.d/elpa/auctex-12.1.2/latex/preview.sty
+Package: preview 2017/04/24 12.1 (AUCTeX/preview-latex)
+ (/usr/local/texlive/2018/texmf-dist/tex/generic/luatex85/luatex85.sty
+Package: luatex85 2016/06/15 v1.4 pdftex aliases for luatex
+) (/Users/rodri/.emacs.d/elpa/auctex-12.1.2/latex/prtightpage.def
+\PreviewBorder=\dimen268
+) (/Users/rodri/.emacs.d/elpa/auctex-12.1.2/latex/prauctex.def
+No auxiliary output files.
+
+
+\hbadness=\count156
+\hfuzz=\dimen269
+(/Users/rodri/.emacs.d/elpa/auctex-12.1.2/latex/prauctex.cfg)) (/Users/rodri/.emacs.d/elpa/auctex-12.1.2/latex/prfootnotes.def)
+\pr@snippet=\count157
+\pr@box=\box54
+\pr@output=\toks48
+
+Preview: Fontsize 12pt
+Preview: PDFoutput 1
+)
+LaTeX Info: Redefining \. on input line 18.
+LaTeX Info: Redefining \% on input line 18.
+ (/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count158
+\scratchdimen=\dimen270
+\scratchbox=\box55
+\nofMPsegments=\count159
+\nofMParguments=\count160
+\everyMPshowfont=\toks49
+\MPscratchCnt=\count161
+\MPscratchDim=\dimen271
+\MPnumerator=\count162
+\makeMPintoPDFobject=\count163
+\everyMPtoPDFconversion=\toks50
+) (/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+ (/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+) (/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+ (/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+ (/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+))) (/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+ (/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+ (/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+ (/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+))) (/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2018/09/10 v0.29 Utility functions of pdfTeX for LuaTeX (HO)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 438.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+ (/usr/local/texlive/2018/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(92.14519pt, 430.00462pt, 92.14519pt)
+* v-part:(T,H,B)=(95.39737pt, 556.47656pt, 143.09605pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=469.47046pt
+* \textheight=640.187pt
+* \oddsidemargin=14.22636pt
+* \evensidemargin=-14.22636pt
+* \topmargin=0.0pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=0.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+ABD: EveryShipout initializing macros
+
+Package pgfplots Warning: running in backwards compatibility mode (unsuitable tick labels; missing features). Consider writing \pgfplotsset{compat=1.16} into your preamble.
+ on input line 18.
+
+ !name(TesisMSc.tex) !offset(-3)  (./HojaTitulo/HojaTituloMSc.tex
+./HojaTitulo/HojaTituloMSc.tex:4: Preview: Snippet 1 started.
+<-><->
+      
+l.4 \begin{figure}
+                  
+Not a real error.
+
+<HojaTitulo/UCBSinFondo.png, id=4, 229.8186pt x 286.1892pt>
+File: HojaTitulo/UCBSinFondo.png Graphic file (type png)
+<use HojaTitulo/UCBSinFondo.png>
+Package pdftex.def Info: HojaTitulo/UCBSinFondo.png  used on input line 10.
+(pdftex.def)             Requested size: 172.36353pt x 214.64136pt.
+Preview: Tightpage -32891 -32891 32891 32891
+./HojaTitulo/HojaTituloMSc.tex:11: Preview: Snippet 1 ended.(20026803+0x30767216).
+<-><->
+      
+l.11 \end{figure}
+                 
+Not a real error.
+
+[1{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./HojaTitulo/UCBSinFondo.png>]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+) (./Tab_Simbolos/TabSimbolosMSc.tex
+./Tab_Simbolos/TabSimbolosMSc.tex:17: Preview: Snippet 2 started.
+<-><->
+      
+l.17 \textbf
+            {S\'{\i}mbolo}&\textbf{T\'{e}rmino}&\\[0.6ex]\hline
+Not a real error.
+
+./Tab_Simbolos/TabSimbolosMSc.tex:17: Preview: Snippet 2 ended.(498346+0x2888397).
+<-><->
+      
+l.17 \textbf{S\'{\i}mbolo}&
+                           \textbf{T\'{e}rmino}&\\[0.6ex]\hline
+Not a real error.
+
+[2]
+./Tab_Simbolos/TabSimbolosMSc.tex:17: Preview: Snippet 3 started.
+<-><->
+      
+l.17 \textbf{S\'{\i}mbolo}&\textbf{T\'{e}rmino}&\\
+                                                  [0.6ex]\hline
+Not a real error.
+
+./Tab_Simbolos/TabSimbolosMSc.tex:17: Preview: Snippet 3 ended.(0+0x0).
+<-><->
+      
+l.17 ...'{\i}mbolo}&\textbf{T\'{e}rmino}&\\[0.6ex]
+                                                  \hline
+Not a real error.
+
+[3]
+./Tab_Simbolos/TabSimbolosMSc.tex:19: Preview: Snippet 4 started.
+<-><->
+      
+l.19 \textbf
+            {S\'{\i}mbolo}&\textbf{T\'{e}rmino}&\\[0.6ex]\hline
+Not a real error.
+
+./Tab_Simbolos/TabSimbolosMSc.tex:19: Preview: Snippet 4 ended.(498346+0x2888397).
+<-><->
+      
+l.19 \textbf{S\'{\i}mbolo}&
+                           \textbf{T\'{e}rmino}&\\[0.6ex]\hline
+Not a real error.
+
+[4]
+./Tab_Simbolos/TabSimbolosMSc.tex:19: Preview: Snippet 5 started.
+<-><->
+      
+l.19 \textbf{S\'{\i}mbolo}&\textbf{T\'{e}rmino}&\\
+                                                  [0.6ex]\hline
+Not a real error.
+
+./Tab_Simbolos/TabSimbolosMSc.tex:19: Preview: Snippet 5 ended.(0+0x0).
+<-><->
+      
+l.19 ...'{\i}mbolo}&\textbf{T\'{e}rmino}&\\[0.6ex]
+                                                  \hline
+Not a real error.
+
+[5]
+./Tab_Simbolos/TabSimbolosMSc.tex:21: Preview: Snippet 6 started.
+<-><->
+      
+l.21       I
+            _{\text{max}}        & Corriente m\'axima[\textit A]            ...
+Not a real error.
+
+./Tab_Simbolos/TabSimbolosMSc.tex:21: Preview: Snippet 6 ended.(490372+107642x1384980).
+<-><->
+      
+l.21       I_{\text{max}}        &
+                                   Corriente m\'axima[\textit A]            ...
+Not a real error.
+
+[6]
+./Tab_Simbolos/TabSimbolosMSc.tex:22: Preview: Snippet 7 started.
+<-><->
+      
+l.22       \alpha
+                  &tasa de aprendizaje                     \\%
+Not a real error.
+
+./Tab_Simbolos/TabSimbolosMSc.tex:22: Preview: Snippet 7 ended.(308974+0x461718).
+<-><->
+      
+l.22       \alpha &
+                   tasa de aprendizaje                     \\%
+Not a real error.
+
+[7]
+./Tab_Simbolos/TabSimbolosMSc.tex:23: Preview: Snippet 8 started.
+<-><->
+      
+l.23       \lambda
+                  _{\text{i}}   & Autovalor i                             \\%
+Not a real error.
+
+./Tab_Simbolos/TabSimbolosMSc.tex:23: Preview: Snippet 8 ended.(498346+107642x606120).
+<-><->
+      
+l.23       \lambda_{\text{i}}   &
+                                  Autovalor i                             \\%
+Not a real error.
+
+[8]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table \textbf {0-1} on input line 25.
+
+./Tab_Simbolos/TabSimbolosMSc.tex:37: Preview: Snippet 9 started.
+<-><->
+      
+l.37  $
+       DP$&Deep Learning - Aprendizaje profundo \\%
+Not a real error.
+
+./Tab_Simbolos/TabSimbolosMSc.tex:37: Preview: Snippet 9 ended.(490372+0x1174454).
+<-><->
+      
+l.37  $DP$
+          &Deep Learning - Aprendizaje profundo \\%
+Not a real error.
+
+[9]
+./Tab_Simbolos/TabSimbolosMSc.tex:38: Preview: Snippet 10 started.
+<-><->
+      
+l.38  $
+       FCEM$    & Fuerza contraelectromotriz\\%
+Not a real error.
+
+./Tab_Simbolos/TabSimbolosMSc.tex:38: Preview: Snippet 10 ended.(490372+0x2470900).
+<-><->
+      
+l.38  $FCEM$
+                & Fuerza contraelectromotriz\\%
+Not a real error.
+
+[10]
+./Tab_Simbolos/TabSimbolosMSc.tex:39: Preview: Snippet 11 started.
+<-><->
+      
+l.39  $
+       RAM$   &Random Access Memory - Memoria de Acceso Aleatorio\\%
+Not a real error.
+
+./Tab_Simbolos/TabSimbolosMSc.tex:39: Preview: Snippet 11 ended.(490372+0x1863069).
+<-><->
+      
+l.39  $RAM$
+              &Random Access Memory - Memoria de Acceso Aleatorio\\%
+Not a real error.
+
+[11]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table \textbf {0-2} on input line 41.
+
+)
+./_region_.tex:33: Preview: Snippet 12 started.
+<-><->
+      
+l.33 \tableofcontents
+                     
+Not a real error.
+
+./_region_.tex:33: Preview: Snippet 12 ended.(6084034+0x30767216).
+<-><->
+      
+l.33 \tableofcontents
+                     
+Not a real error.
+
+[12
+
+]
+No file _region_.toc.
+./_region_.tex:34: Preview: Snippet 13 started.
+<-><->
+      
+l.34 \listoffigures
+                   
+Not a real error.
+
+./_region_.tex:34: Preview: Snippet 13 ended.(5921837+0x30767216).
+<-><->
+      
+l.34 \listoffigures
+                   
+Not a real error.
+
+[13
+
+]
+No file _region_.lof.
+./_region_.tex:36: Preview: Snippet 14 started.
+<-><->
+      
+l.36 \listoftables
+                  
+Not a real error.
+
+./_region_.tex:36: Preview: Snippet 14 ended.(5921837+0x30767216).
+<-><->
+      
+l.36 \listoftables
+                  
+Not a real error.
+
+[14
+
+]
+No file _region_.lot.
+(./Kap1/Kap1.tex
+./Kap1/Kap1.tex:3: Preview: Snippet 15 started.
+<-><->
+      
+l.3 \chapter
+            {Marco Referencial}
+Not a real error.
+
+Cap\'{\i }tulo 1.
+./Kap1/Kap1.tex:3: Preview: Snippet 15 ended.(9236668+0x30767216).
+<-><->
+      
+l.3 \chapter{Marco Referencial}
+                               
+Not a real error.
+
+[15
+
+
+
+
+]
+./Kap1/Kap1.tex:14: Preview: Snippet 16 started.
+<-><->
+      
+l.14 ... Universidad Nacional de Colombia\footnote
+                                                  {ver: www.sinab.unal.edu.c...
+Not a real error.
+
+./Kap1/Kap1.tex:14: Preview: Snippet 16 ended.(598293+0x311300).
+<-><->
+      
+l.14 ...ombia\footnote{ver: www.sinab.unal.edu.co}
+                                                  , en la secci\'{o}n "Recur...
+Not a real error.
+
+[16]
+LaTeX Info: Redefining \. on input line 57.
+LaTeX Info: Redefining \% on input line 57.
+)
+LaTeX Info: Redefining \. on input line 40.
+LaTeX Info: Redefining \% on input line 40.
+ (./Kap2/Kap2.tex
+./Kap2/Kap2.tex:1: Preview: Snippet 17 started.
+<-><->
+      
+l.1 \chapter
+            {Marco Te\'orico}
+Not a real error.
+
+Cap\'{\i }tulo 2.
+./Kap2/Kap2.tex:1: Preview: Snippet 17 ended.(9236668+0x30767216).
+<-><->
+      
+l.1 \chapter{Marco Te\'orico}
+                             
+Not a real error.
+
+[17
+
+
+
+
+]
+./Kap2/Kap2.tex:11: Preview: Snippet 18 started.
+<-><->
+      
+l.11 ... Universidad Nacional de Colombia\footnote
+                                                  {Ver:www.sinab.unal.edu.co...
+Not a real error.
+
+./Kap2/Kap2.tex:11: Preview: Snippet 18 ended.(598293+0x311300).
+<-><->
+      
+l.11 ...ombia\footnote{Ver:www.sinab.unal.edu.co }
+                                                   secci\'{o}n "Recursos bib...
+Not a real error.
+
+[18]
+
+LaTeX Warning: Citation `AG01' on page 4 undefined on input line 13.
+
+
+LaTeX Warning: Citation `AG12' on page 4 undefined on input line 15.
+
+
+LaTeX Warning: Citation `AG52' on page 4 undefined on input line 15.
+
+
+LaTeX Warning: Citation `AG70' on page 4 undefined on input line 15.
+
+
+LaTeX Warning: Citation `AG08a' on page 4 undefined on input line 15.
+
+
+LaTeX Warning: Citation `AG09a' on page 4 undefined on input line 15.
+
+
+LaTeX Warning: Citation `AG36a' on page 4 undefined on input line 15.
+
+
+LaTeX Warning: Citation `AG01i' on page 4 undefined on input line 15.
+
+
+LaTeX Warning: Citation `AG02i' on page 5 undefined on input line 44.
+
+./Kap2/Kap2.tex:46: Preview: Snippet 19 started.
+<-><->
+      
+l.46 ...g\'{\i}a primaria /\% (Mtoe)\;$\tnote{1}$}
+                                                  \\\cline{2-3}%
+Not a real error.
+
+./Kap2/Kap2.tex:46: Preview: Snippet 19 ended.(598293+0x0).
+<-><->
+      
+l.46 ...g\'{\i}a primaria /\% (Mtoe)\;$\tnote{1}$}
+                                                  \\\cline{2-3}%
+Not a real error.
+
+[19]
+LaTeX Info: Redefining \. on input line 57.
+LaTeX Info: Redefining \% on input line 57.
+
+./Kap2/Kap2.tex:62: Preview: Snippet 20 started.
+<-><->
+      
+l.62 	\begin{equation}
+                      \label{fuerza}
+Not a real error.
+
+./Kap2/Kap2.tex:64: Preview: Snippet 20 ended.(717618+0x30767216).
+<-><->
+      
+l.64 	\end{equation}
+                    
+Not a real error.
+
+[20
+
+]
+./Kap2/Kap2.tex:66: Preview: Snippet 21 started.
+<-><->
+      
+l.66 \(
+       F\) es fuerza\\
+Not a real error.
+
+./Kap2/Kap2.tex:66: Preview: Snippet 21 ended.(490372+0x561139).
+<-><->
+      
+l.66 \(F\)
+           es fuerza\\
+Not a real error.
+
+[21]
+./Kap2/Kap2.tex:67: Preview: Snippet 22 started.
+<-><->
+      
+l.67 \(
+       m\) es masa\\
+Not a real error.
+
+./Kap2/Kap2.tex:67: Preview: Snippet 22 ended.(308974+0x630079).
+<-><->
+      
+l.67 \(m\)
+           es masa\\
+Not a real error.
+
+[22]
+./Kap2/Kap2.tex:68: Preview: Snippet 23 started.
+<-><->
+      
+l.68 \(
+       a\) es aceleraci\'on\\
+Not a real error.
+
+./Kap2/Kap2.tex:68: Preview: Snippet 23 ended.(308974+0x379326).
+<-><->
+      
+l.68 \(a\)
+           es aceleraci\'on\\
+Not a real error.
+
+[23]
+
+LaTeX Warning: Reference `fuerza' on page 6 undefined on input line 69.
+
+)
+LaTeX Info: Redefining \. on input line 41.
+LaTeX Info: Redefining \% on input line 41.
+ (./Kap3/Kap3.tex
+./Kap3/Kap3.tex:1: Preview: Snippet 24 started.
+<-><->
+      
+l.1 \chapter
+            {Marco Pr\'actico}
+Not a real error.
+
+Cap\'{\i }tulo 3.
+./Kap3/Kap3.tex:1: Preview: Snippet 24 ended.(9236668+0x30767216).
+<-><->
+      
+l.1 \chapter{Marco Pr\'actico}
+                              
+Not a real error.
+
+[24
+
+
+
+
+]
+./Kap3/Kap3.tex:5: Preview: Snippet 25 started.
+<-><->
+      
+l.5 ...a Universidad Nacional de Colombia\footnote
+                                                  {Ver:www.sinab.unal.edu.co...
+Not a real error.
+
+./Kap3/Kap3.tex:5: Preview: Snippet 25 ended.(598293+0x311300).
+<-><->
+      
+l.5 ...lombia\footnote{Ver:www.sinab.unal.edu.co }
+                                                   secci\'{o}n "Recursos bib...
+Not a real error.
+
+[25]
+
+LaTeX Warning: Citation `AG01' on page 7 undefined on input line 7.
+
+
+LaTeX Warning: Citation `AG12' on page 7 undefined on input line 9.
+
+
+LaTeX Warning: Citation `AG52' on page 7 undefined on input line 9.
+
+
+LaTeX Warning: Citation `AG70' on page 7 undefined on input line 9.
+
+
+LaTeX Warning: Citation `AG08a' on page 7 undefined on input line 9.
+
+
+LaTeX Warning: Citation `AG09a' on page 7 undefined on input line 9.
+
+
+LaTeX Warning: Citation `AG36a' on page 7 undefined on input line 9.
+
+
+LaTeX Warning: Citation `AG01i' on page 7 undefined on input line 9.
+
+./Kap3/Kap3.tex:21: Preview: Snippet 26 started.
+<-><->
+      
+l.21 ... al pie y su nota correspondiente\footnote
+                                                  {Las notas van como "notas...
+Not a real error.
+
+./Kap3/Kap3.tex:21: Preview: Snippet 26 ended.(598293+0x311300).
+<-><->
+      
+l.21 ...i\'{o}n bibliogr\'{a}fica seleccionadas).}
+                                                  . La fuente documental se ...
+Not a real error.
+
+[26]
+
+LaTeX Warning: Reference `fig:Fruto' on page 8 undefined on input line 27.
+
+./Kap3/Kap3.tex:28: Preview: Snippet 27 started.
+<-><->
+      
+l.28 \begin{figure}
+                   
+Not a real error.
+
+<Kap3/FrutoSp.png, id=97, 391.7034pt x 274.1442pt>
+File: Kap3/FrutoSp.png Graphic file (type png)
+<use Kap3/FrutoSp.png>
+Package pdftex.def Info: Kap3/FrutoSp.png  used on input line 30.
+(pdftex.def)             Requested size: 391.70244pt x 274.14351pt.
+
+LaTeX Warning: Citation `AG03p' on page 8 undefined on input line 31.
+
+
+LaTeX Warning: Citation `AG04p' on page 8 undefined on input line 31.
+
+./Kap3/Kap3.tex:32: Preview: Snippet 27 ended.(19863542+0x30767216).
+<-><->
+      
+l.32 \end{figure}
+                 
+Not a real error.
+
+[27
+
+
+ <./Kap3/FrutoSp.png (PNG copy)>]
+
+LaTeX Warning: Reference `EMundo1' on page 8 undefined on input line 48.
+
+
+LaTeX Warning: Citation `AG02i' on page 8 undefined on input line 53.
+
+./Kap3/Kap3.tex:55: Preview: Snippet 28 started.
+<-><->
+      
+l.55 ...g\'{\i}a primaria /\% (Mtoe)\;$\tnote{1}$}
+                                                  \\\cline{2-3}%
+Not a real error.
+
+./Kap3/Kap3.tex:55: Preview: Snippet 28 ended.(598293+0x0).
+<-><->
+      
+l.55 ...g\'{\i}a primaria /\% (Mtoe)\;$\tnote{1}$}
+                                                  \\\cline{2-3}%
+Not a real error.
+
+[28]
+LaTeX Info: Redefining \. on input line 66.
+LaTeX Info: Redefining \% on input line 66.
+)
+LaTeX Info: Redefining \. on input line 42.
+LaTeX Info: Redefining \% on input line 42.
+ (./Kap4/Kap4.tex
+./Kap4/Kap4.tex:1: Preview: Snippet 29 started.
+<-><->
+      
+l.1 \chapter
+            {Marco Conclusivo}
+Not a real error.
+
+Cap\'{\i }tulo 4.
+./Kap4/Kap4.tex:1: Preview: Snippet 29 ended.(9236668+0x30767216).
+<-><->
+      
+l.1 \chapter{Marco Conclusivo}
+                              
+Not a real error.
+
+[29
+
+
+
+
+])
+No file _region_.bbl.
+(./Anexos/Anexos.tex
+./Anexos/Anexos.tex:2: Preview: Snippet 30 started.
+<-><->
+      
+l.2 \chapter
+            {Anexo: Nombrar el anexo A de acuerdo con su contenido}\label{An...
+Not a real error.
+
+Ap\'{e}ndice A.
+./Anexos/Anexos.tex:2: Preview: Snippet 30 ended.(10822648+0x30767216).
+<-><->
+      
+l.2 ...rar el anexo A de acuerdo con su contenido}
+                                                  \label{AnexoA}
+Not a real error.
+
+[30
+
+
+
+
+]
+./Anexos/Anexos.tex:5: Preview: Snippet 31 started.
+<-><->
+      
+l.5 \chapter
+            {Anexo: Nombrar el anexo B de acuerdo con su contenido}
+Not a real error.
+
+Ap\'{e}ndice B.
+./Anexos/Anexos.tex:5: Preview: Snippet 31 ended.(10822648+0x30767216).
+<-><->
+      
+l.5 ...rar el anexo B de acuerdo con su contenido}
+                                                  
+Not a real error.
+
+[31
+
+
+
+
+]
+./Anexos/Anexos.tex:8: Preview: Snippet 32 started.
+<-><->
+      
+l.8 \chapter
+            {Anexo: Nombrar el anexo C de acuerdo con su contenido}
+Not a real error.
+
+Ap\'{e}ndice C.
+./Anexos/Anexos.tex:8: Preview: Snippet 32 ended.(10822648+0x30767216).
+<-><->
+      
+l.8 ...rar el anexo C de acuerdo con su contenido}
+                                                  
+Not a real error.
+
+[32
+
+
+
+
+]
+./Anexos/Anexos.tex:31: Preview: Snippet 33 started.
+<-><->
+      
+l.31 ... Universidad Nacional de Colombia\footnote
+                                                  {Ver: www.sinab.unal.edu.c...
+Not a real error.
+
+./Anexos/Anexos.tex:31: Preview: Snippet 33 ended.(598293+0x311300).
+<-><->
+      
+l.31 ...ombia\footnote{Ver: www.sinab.unal.edu.co}
+                                                  , disponible en la secci\'...
+Not a real error.
+
+[33])
+LaTeX Info: Redefining \. on input line 47.
+LaTeX Info: Redefining \% on input line 47.
+
+
+Package longtable Warning: Table widths have changed. Rerun LaTeX.
+
+
+LaTeX Warning: There were undefined references.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 1155 strings out of 469069
+ 17614 string characters out of 5534280
+ 824040 words of memory out of 5000000
+ 28072 multiletter control sequences out of 15000+600000
+ 13489 words of font info for 48 fonts, out of 8000000 for 9000
+ 1151 hyphenation exceptions out of 8191
+ 43i,17n,41p,959b,469s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb>
+Output written on _region_.pdf (33 pages, 190023 bytes).
+PDF statistics:
+ 145 PDF objects out of 1000 (max. 8388607)
+ 99 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 23 words of extra memory for PDF output out of 10000 (max. 10000000)
+

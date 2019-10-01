@@ -1,0 +1,100 @@
+% Created 2019-09-30 Mon 20:09
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{rodri}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={rodri},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.0.50 (Org mode 9.2.3)}, 
+ pdflang={English}}
+\begin{document}
+
+\tableofcontents
+
+\input{EncabezadoTesisMSc}
+\%\includeonly{Kap1/Kap1,Kap2/Kap2}
+\usepackage{titlesec} 
+\renewcommand{\tablename}\{\textbf{Tabla}\}
+\renewcommand{\figurename}\{\textbf{Figura}\}
+\renewcommand{\listtablename}{Lista de Tablas}
+\renewcommand{\listfigurename}{Lista de Figuras}
+\renewcommand{\labelitemi}{$\bullet$}
+\titleformat{\chapter}[display]
+\{\bfseries\Large\}
+\{\filright\MakeUppercase{\chaptertitlename} \Huge\thechapter\}
+\{1ex\}
+\{\titlerule\vspace{1ex}\filleft\}
+[\vspace{1ex}\titlerule]
+
+
+
+\begin{document}
+
+	
+\pagenumbering{roman}
+\include{HojaTitulo/HojaTituloMSc}
+
+\renewcommand{\contentsname}{\textbf{\LARGE \'Indice}}
+
+\include{Tab_Simbolos/TabSimbolosMSc}
+%\newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
+
+\tableofcontents
+\listoffigures
+
+\listoftables
+%\include{Resumen}%\newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
+\newpage
+\pagenumbering{arabic}
+\include{Kap1/Kap1}
+\include{Kap2/Kap2}
+\include{Kap3/Kap3}
+\include{Kap4/Kap4}
+\addcontentsline{toc}{chapter}{\numberline{}Bibliograf\'{\i}a}
+\bibliographystyle{plaindin_esp}
+\bibliography{BibliMSc}
+\include{Anexos/Anexos}
+
+\end{document}
+\section{Marco Referencial}
+\label{sec:org837fd35}
+\section{Marco teórico}
+\label{sec:org45e9a7d}
+\subsection{Estado del arte [obj especificos]}
+\label{sec:org7233cea}
+\subsubsection{Neurosky}
+\label{sec:org55318ff}
+\subsubsection{Tecnico}
+\label{sec:org776a278}
+\subsubsection{Modular}
+\label{sec:org59cc94e}
+\subsection{Fundamentos}
+\label{sec:orge32a7ca}
+\subsubsection{siencia investigada para desarrollar}
+\label{sec:org3c1f3d6}
+\subsubsection{ADCS}
+\label{sec:orge26b4c3}
+\subsubsection{Impedancia - aplicado}
+\label{sec:org16e3c2a}
+\subsubsection{NO EXPLICAR Q ES BODE}
+\label{sec:org66d30c1}
+\subsubsection{EXPLICAR ANCHO DE BANDA}
+\label{sec:org661008c}
+\end{document}
