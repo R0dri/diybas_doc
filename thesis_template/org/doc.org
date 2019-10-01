@@ -15,43 +15,19 @@
  No obstante, todos los casos se ven afectados por el número de electrodos disponibles debido a que la actividad cerebral se da simultáneamente en múltiples lugares. Mientras mayor sea la cantidad de electrodos, se obtendrán mejores resultados. Un ejemplo  de esto son los estudios de polisomnografía, donde es necesario contar con... [2].
 
 ** Planteamiento del problema
- 1. La medición de bioseñales requiere hardware especializado ya que es una tarea compleja.
-    * Por naturaleza, la medición de bioseñales es una tarea bastante complicada ya que además de ser muy tenues en tensión eléctrica, se encuentran en un ambiente de mucho ruido electrostático e interferencias de otras bioseñales.
-    * Para lograr una medición efectiva se deben implementar circuitos analógicos para lidiar con este tipo de señales de baja taza de señal respecto al ruido (SNR).
- 
- /_ La medición de bioseñales requiere hardware especializado ya que es una tarea bastante compleja. Las bioseñales suelen tener baja taza de señal respecto al ruido (SNR). Es decir que suelen ser muy tenues en tensión eléctrica respecto al ambiente en el que se encuentran: alto en ruido eléctrico e interferencias de otras bioseñales. Por esto, se deben implementar circuitos analógicos para lograr una medición efectiva. _/
 
  /_ La medición de bioseñales requiere hardware especializado ya que es una tarea compleja por naturaleza. Esto se debe a que las bioseñales son muy tenues en tensión eléctrica y ademas se encuentran en un ambiente de mucho ruido electrostático e interferencias de otras bioseñales. Para lograr una medición efectiva se deben implementar circuitos analógicos que lidi con este tipo de señales de baja taza de señal respecto al ruido (SNR). _/
 
- 2. EEG requiere hardware más especializado.
-    * El EEG es la más tenue de las bioseñales por lo cual requiere mayor tratamiento; promedia en una magnitud de 100µV [7], no obstante el ruido se mantiene al mismo nivel en todas las bioseñales.
-    * El diseño es simple, pero cada canal requiere un circuito propio ya que se trabaja la señal de manera analógica.
 
  /_ Las señales EEG requieren hardware más especializado debido a que es la más tenue de las bioseñales, por lo cual requiere mayor tratamiento. Su magnitud promedia en los 100µV [7] mientras que el ruido se mantiene al mismo nivel que en todas las bioseñales. El diseño es simple, no obstante cada canal requiere un circuito propio ya que la señal se trabaja de manera analógica _/
 
- 1. Dispositivos para EEG que cumplen requerimientos de estandarizaciones internacionales son excesivamente costosos. (Inaccesible para pequeños grupos de investigación).
-    * Para cumplir requerimientos y recomendaciones de la IFCN [7] los costos se elevan, generalmente de manera proporcional al número de canales.
-    * El precio de un dispositivo de estas cualidades deja afuera a muchos investigadores.
 
  /_ Los dispositivos para EEG que cumplen requerimientos de estandarizaciónes internacionales son inaccesibles para pequeños grupos de investigación. Los costos se elvan para cumplir requerimientos y recomendaciónes de instituciones como la IFCN y la ACNS, generalmente de manera proporcional al número de canalaes.   _/
 
- 2. El costo del hardware causa que exista menos cantidad de desarrollo a nivel mundial en neurociencia
-    * El campo de la neurociencia se mantiene pequeño ya que pocas personas se encuentran capaces de hacer investigaciones fidedignas.
-    * Como el mercado es pequeño, los proveedores de equipos deben mantener un precio alto para mantener la rentabilidad.
 /_ El costo del hardware causa que exista menos cantidad de desarrollo de neurociencia a nivel mundial. Este campo de la siencia se mantiene contraido ya que existen pocas personas capaces de hacer investigaciones fidedignas. Debido a que el mercado es pequeño, los proveedores de equipos deben mantener un precio alto para mantener la rentabilidad.  _/
 
- 1. Para reducir costos, sacrifican alguno de los siguientes: [manuales, flyers]
-    * Número de canales
-      - Cada canal cuenta con un set de componentes lo cual incrementa proporcionalmente el costo total.
-    * Interfaz con el software - caso emotiv,bci
-      - Para mantener rentabilidad y retención de clientes, los softwares disponibles suelen ser limitados en funciones aparte restricciones por licencias.
-    * Modificabilidad de hardware - bci, moudlarEEG
-      - Los dispositivos para EEG cuentan con los componentes necesarios para medir múltiples tipos de señales e inclusive bioseñales, pero pocos cuentan con los medios necesarios integrados en su diseño para poder ser adaptados.
-      - 
  /_ Para reducir los costos se suele sacrificar alguno de los siguientes 3 aspectos: Uno, en la cantidad de canales. Esto es evidente por lo mencionado anteriormente. Cada canal requiere una cantidad de componentes necesarios para tratar la señal de manera analogica. Dos, software de interfaz. Para mantener la rentabilidad, algunos dispositivos como los de emotiv [ref] restringen el uso del dispositivo por medio de licencias en un software propietario con compatibilidad con terceros y funcionalidad restringidos. Tres, modularidad del hardware. Los dispositios EEG cuentan con los componentes necesarios para medir múltiples tipos de señales y bioseñales; sin embargo, pocos dispositivos como el openBCI [ref] cuentan con los medios necesarios integrados en su diseño para poder ser adaptados. _/
 
- 1. Poca variedad en productos económicos, dificulta optimizar costos en función a la aplicación.
-    * No hay tanta variedad de productos por lo que es difícil elegir una opción adecuada a un caso de uso. Esto también causa en un gasto extra para el usuario ya que debe optar por el dispositivo cercano más potente si no quiere sacrificar sus resultados.
  /_ La poca variedad en productos económicos dificulta la optimización de costos en función a la aplicación. Esto causa que el usuario termine optando por la opcion próxima más potente; en muchos casos este salto es muy grande [refs] _/
 
 *** Definición del problema
