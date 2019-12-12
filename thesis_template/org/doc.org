@@ -1,5 +1,4 @@
-* Marco Referencial
-\chapter{Marco Referencial}
+* \chapter{Marco Referencial}
 ** Introducción
  Las bioseñales son originadas por la actividad eléctrica generada por un ser viviente. Estas pueden ser impulsos eléctricos enviados a los músculos para contracción, así como los generados por las sinapsis del cerebro. Las señales más conocidas y estudiadas son: las  provenientes del corazón (ECG), del movimiento intraocular (EOG), del movimiento muscular (EMG) y de la actividad cerebral (EEG). 
 
@@ -16,72 +15,146 @@
 
 ** Planteamiento del problema
 
- /_ La medición de bioseñales requiere hardware especializado ya que es una tarea compleja por naturaleza. Esto se debe a que las bioseñales son muy tenues en tensión eléctrica y ademas se encuentran en un ambiente de mucho ruido electrostático e interferencias de otras bioseñales. Para lograr una medición efectiva se deben implementar circuitos analógicos que lidi con este tipo de señales de baja taza de señal respecto al ruido (SNR). _/
+La medición de bioseñales requiere hardware especializado ya que por naturaleza es una tarea compleja. Esto se debe a que las bioseñales son muy tenues en tensión eléctrica ademas de encontrarse en un ambiente de mucho ruido e interferencias de otras bioseñales. Para lograr una medición efectiva se deben implementar circuitos analógicos que lidien con este tipo de señales con baja taza de señal respecto al ruido (SNR).
 
+Medir las señales EEG requieren hardware aun más especializado ya que es la más tenue de las bioseñales, pues su magnitud promedia los 100µV[7]. Mientras, el ruido se mantiene al mismo nivel que en todas las bioseñales por lo que se requiere mayor tratamiento. Si bien el diseño es simple e igual para cada canal, cada uno requiere un circuito propio ya que la señal se debe pre-procesar de manera analógica.
 
- /_ Las señales EEG requieren hardware más especializado debido a que es la más tenue de las bioseñales, por lo cual requiere mayor tratamiento. Su magnitud promedia en los 100µV [7] mientras que el ruido se mantiene al mismo nivel que en todas las bioseñales. El diseño es simple, no obstante cada canal requiere un circuito propio ya que la señal se trabaja de manera analógica _/
+Los dispositivos para EEG que cumplen requerimientos de estandarizaciónes internacionales son inaccesibles para pequeños grupos de investigación. Los costos se elevan para cumplir requerimientos y recomendaciónes de instituciones como la IFCN y la ACNS, generalmente de manera proporcional al número de canalaes.
 
+El costo del hardware causa que exista menos cantidad de desarrollo de neurociencia a nivel mundial. Este campo de la ciencia se mantiene contraido ya que existen pocas personas capaces de hacer investigaciones fidedignas. En resultado el mercado se mantiene pequeño causando que los proveedores de equipos deban mantener un precio alto para conservar la rentabilidad.
 
- /_ Los dispositivos para EEG que cumplen requerimientos de estandarizaciónes internacionales son inaccesibles para pequeños grupos de investigación. Los costos se elvan para cumplir requerimientos y recomendaciónes de instituciones como la IFCN y la ACNS, generalmente de manera proporcional al número de canalaes.   _/
+Para reducir los costos se suele sacrificar alguno de los siguientes 3 aspectos: Uno, la cantidad de canales. Esto es evidente por lo mencionado anteriormente; cada canal requiere un numero de componentes necesarios para tratar la señal de manera analogica. Dos, software e interfaz. Para mantener la rentabilidad, algunos dispositivos como los de emotiv [ref] restringen el uso del dispositivo por medio de licencias en un software propietario. Asimismo se restringe la compatibilidad con terceros limitando la funcionalidad. Tres, modularidad del hardware. Los dispositios EEG cuentan con los componentes necesarios para medir múltiples tipos de señales y bioseñales; sin embargo, pocos dispositivos como el openBCI [ref] cuentan con los medios necesarios integrados en su diseño para poder ser adaptados.
 
-/_ El costo del hardware causa que exista menos cantidad de desarrollo de neurociencia a nivel mundial. Este campo de la siencia se mantiene contraido ya que existen pocas personas capaces de hacer investigaciones fidedignas. Debido a que el mercado es pequeño, los proveedores de equipos deben mantener un precio alto para mantener la rentabilidad.  _/
-
- /_ Para reducir los costos se suele sacrificar alguno de los siguientes 3 aspectos: Uno, en la cantidad de canales. Esto es evidente por lo mencionado anteriormente. Cada canal requiere una cantidad de componentes necesarios para tratar la señal de manera analogica. Dos, software de interfaz. Para mantener la rentabilidad, algunos dispositivos como los de emotiv [ref] restringen el uso del dispositivo por medio de licencias en un software propietario con compatibilidad con terceros y funcionalidad restringidos. Tres, modularidad del hardware. Los dispositios EEG cuentan con los componentes necesarios para medir múltiples tipos de señales y bioseñales; sin embargo, pocos dispositivos como el openBCI [ref] cuentan con los medios necesarios integrados en su diseño para poder ser adaptados. _/
-
- /_ La poca variedad en productos económicos dificulta la optimización de costos en función a la aplicación. Esto causa que el usuario termine optando por la opcion próxima más potente; en muchos casos este salto es muy grande [refs] _/
+La poca variedad en productos dificulta la optimización de costos en función a la aplicación. Esto causa que el usuario termine optando por la opcion próxima más potente que en muchos casos, es un salto muy grande en el costo [refs].
 
 *** Definición del problema
- Medir bioseñales EEG es una tarea bastante compleja, por lo cual las máquinas capaces de cumplir la tarea son costosas. Además, es muy difícil reducir los costos ya que la variedad  de productos del tipo BAS para EEG en el rango menor a los 1000 USD es muy baja así como la flexibilidad, compatibilidad y facilidad de uso del hardware y software. Esto supone dificultades en especial para las distintas aplicaciones que requieren distintas capacidades del hardware. La mayoría de los BAS para EEG cuentan con las capacidades necesarias para múltiples tipos de señales e inclusive bioseñales, pero no cuentan con los medios necesarios integrados en su diseño para poder ser adaptados. Además, las dificultades presentes se acentúan debido a la poca flexibilidad que poseen en su diseño tanto en hardware como software para los usuarios que no están involucrados en el desarrollo tecnológico.
+Medir bioseñales EEG es una tarea bastante compleja, por lo cual las máquinas capaces de cumplir la tarea son costosas. Además, es muy difícil reducir costos ya que la variedad de productos del tipo BAS para EEG _en el rango menor a los 1000 USD_ es muy baja así como lo es la flexibilidad, compatibilidad y facilidad de uso del hardware y software. Esto supone dificultades en especial para las distintas aplicaciones que requieren distintas capacidades del hardware. La mayoría de los BAS para EEG cuentan con las capacidades necesarias para múltiples tipos de señales e inclusive bioseñales, pero no cuentan con los medios necesarios integrados en su diseño para poder ser adaptados. Además, las dificultades presentes se acentúan debido a la poca flexibilidad que poseen en su diseño tanto en hardware como software para los usuarios que no están involucrados en el desarrollo tecnológico.
 ** Objetivos
 *** Objetivo general
  Diseñar e implementar un sistema modular que permita medir y grabar digitalmente bioseñales EEG.
 *** Objetivos específicos
- Medir, grabar y visualizar señales EEG en vivo de manera digital en 2 canales independientes.
- Validar las mediciones según su forma y frecuencia comparado con mediciones realizadas por otros dispositivos.
- Diseñar e implementar un sistema modular.
- Diseñar un sistema de protección contra descargas electroestáticas.
- Desarrollar software cuyo uso no requiera conocimientos de programación para el uso del sistema.
- Implementar un sistema de comunicación de datos a través de WiFi.
+1. Medir, grabar y visualizar señales EEG en vivo de manera digital en 2 canales independientes.
+2. Validar las mediciones según su forma y frecuencia comparado con mediciones realizadas por otros dispositivos.
+3. Diseñar e implementar un sistema modular.
+4. Diseñar un sistema de protección contra descargas electroestáticas.
+5. Desarrollar software cuyo uso no requiera conocimientos de programación para el uso del sistema.
+6. Implementar un sistema de comunicación de datos a través de WiFi.
 ** Justificación
  El proyecto se ve entonces justificado con motivo de reducir la brecha de conocimiento al generar más documentación al respecto y así mismo incrementar la investigación al proveer de una alternativa que, por su flexibilidad, pueda ser más adecuada a la hora de elegir un dispositivo en un caso de uso más específico. El aporte académico en un punto de vista conceptual brindará un formato más sencillo y práctico para entender los conceptos de la electroencefalografía y neurociencia, producto de la aplicación y documentación que se van a generar. En el área técnica aporta un diseño que sea fácil de reproducir para aplicaciones que requieran el uso de un sistema de medición de este tipo.
  Del punto de vista académico el aporte es interdisciplinario, uniendo conceptos de sistemas informáticos como el ser redes de comunicación y bases de datos con sistemas de computación embebidos. Asimismo, se le suma el diseño de un dispositivo de adquisición de señales analógicas a digitales con una precisión y robustez muy elevada.
 ** Limites y Alcances
 *** Límites
- Si bien este proyecto apunta a cumplir ciertos niveles de estándares internacionales IFCN, no se llevara acabo ningún proceso de certificación.
- No se evaluará el alcance del proyecto en la comunidad de código abierto.
- No se implementarán todas las variaciones posibles de módulos compatibles para el diseño, se limitará a una unidad y un tipo específico por módulo.
- No se optimizará la comunicación con websockets u otros medios para minimizar el tiempo de desfase en recibir y mostrar los datos.
- No se implementara un medio para guardar datos en caso de desconección.
- No se implementará un reloj en tiempo real en el microcontrolador.
+1. Si bien este proyecto apunta a cumplir ciertos niveles de estándares internacionales IFCN, no se llevara acabo ningún proceso de certificación.
+2. No se evaluará el alcance del proyecto en la comunidad de código abierto.
+3. No se implementarán todas las variaciones posibles de módulos compatibles para el diseño, se limitará a una unidad y un tipo específico por módulo.
+4. No se optimizará la comunicación con websockets u otros medios para minimizar el tiempo de desfase en recibir y mostrar los datos.
+5. No se implementara un medio para guardar datos en caso de desconección.
+6. No se implementará un reloj en tiempo real en el microcontrolador.
 *** Alcances
   1. Accesible
-     - Código Abierto, Documentación amplia. Proporcionar los diseños y breves manuales en repositorios cómo GitHub con su respectiva wiki. Generar una licencia sobre el contenido.
-     - Diseño mínimo básico expansible. El sistema debe poder cumplir con las tareas mínimas requeridas para tener una funcionalidad completa sin asistencia de otros dispositivos. El diseño no debe limitar la expansión en funcionalidades ni capacidades.
+     - [ ] Código Abierto, Documentación amplia. Proporcionar los diseños y breves manuales en repositorios cómo GitHub con su respectiva wiki. Generar una licencia sobre el contenido.
+     - [x] Diseño mínimo básico expansible. El sistema debe poder cumplir con las tareas mínimas requeridas para tener una funcionalidad completa sin asistencia de otros dispositivos EXCEPTO UNA COMPUTADORA. El diseño no debe limitar la expansión en funcionalidades ni capacidades.
   2. Flexible/potenciable
-     - Diseño modular con compatibilidad con EEG, ECG, EMG, EOG al variar la magnitud de amplificación, reemplazo de filtros y cantidad de canales.
-       - Diseño flexible. El diseño debe ser capaz de ser modificado sin tener completo conocimiento sobre todo el diseño para adaptar su funcionamiento y aumentar sus capacidades máximas con pocos cambios.
-     - Numero de entradas expansible. El sistema original implementado medirá hasta 2 canales digitales; sin embargo el sistema debe ser capaz de aumentar el número de entradas hasta al menos 24 canales con el intercambio o adición de nuevos módulos.
+     - [x] Diseño modular con compatibilidad con EEG, ECG, EMG, EOG al variar la magnitud de amplificación, reemplazo de filtros y cantidad de canales.
+       - [x] Diseño flexible. El diseño debe ser capaz de ser modificado sin tener completo conocimiento sobre todo el diseño para adaptar su funcionamiento y aumentar sus capacidades máximas con pocos cambios.
+     - [x] Numero de entradas expansible. El sistema original implementado medirá hasta 2 canales digitales; sin embargo el sistema debe ser capaz de aumentar el número de entradas hasta al menos 24 canales con el intercambio o adición de nuevos módulos.
   3. Facilidad de uso (amigable)
-     - Requerimiento de cero programación. Tanto la configuración inicial como el uso del dispositivo se deben poder llevar a cabo sin conocimientos en programación ni computacionalmente avanzados.
-     - Tener un manual de usuario completo. Este manual debe indicar el uso del software y hardware.
+     - [ ] Requerimiento de cero programación. Tanto la configuración inicial como el uso del dispositivo se deben poder llevar a cabo sin conocimientos en programación ni computacionalmente avanzados.
+     - [ ] Tener un manual de usuario completo. Este manual debe indicar el uso del software y hardware.
   4. Seguridad
-     - Protección contra descargas ESD al circuito. El sistema debe contar con protección de descargas electroestáticas sobre el circuito.
-     - Protección contra descargas desde fuente alimentación. El sistema debe contar con protección a menos de 1kV por 1s a través de un aislamiento galvánico o utilizar una batería que fisicamente limite la energía total.
+     - [ ] Protección contra descargas ESD al circuito. El sistema debe contar con protección de descargas electroestáticas sobre el circuito.
+     - [x] Protección contra descargas desde fuente alimentación. El sistema debe contar con protección a menos de 1kV por 1s a través de un aislamiento galvánico o utilizar una batería que fisicamente limite la energía total.
 
-* Marco Teorico
-\chapter{Marco Te\'orico}
+* \chapter{Marco Te\'orico}
 ** Estado del Arte [obj especificos]
+
+
+*** Electrónico
+**** PWR - ESD
+**** Analógico
+***** OPA
+****** INA
+***** ADC
+***** ESD
+**** Digital
+***** SPI, I2C, Serial
+***** MCU (ESP, teensy)
+*** Modular
+**** CH[spi]
+**** DRL
+**** ADC+MCU
+**** PWR
+
+*** Analógico
+**** INA CMMR>120db (laser trimmed)
+**** ADC 24bits
+*** Comunicación
+**** SPI, I2C, Serial
+**** BT, WIFI
+***** HTTP, MQTT, WS, CoAP
+*** Software
+**** Engine
+**** BD
+**** GUI
+**** Com protocol
+**** (broker - mqtt)
+**** SQL, Mongo, Cassandra, TimeSeries
+
+
 *** Neurosky
+*** ModularEEG
+*** Emotivoc
+*** OpenBCI
+
 *** Tecnico
 *** Modular
 ** Fundamentos Teóricos
-*** siencia investigada para desarrollar
-*** ADCS
+*** ciencia investigada para desarrollar
+- Electrodos (tipos)
+  - Activo
+  - Pasivo
+  - Materiales
+- Impedancia
+- Potencia
+- Virtual GND
+- ESD
+- ESD/DC-DC
+- Filtros
+  - BP
+  - Notch
+- INA
+  + CMRR
+  + 3 vs 2 opa
+  + rail-rail
+  + slew rate
+- Gain basic opa
+  - PGA
+- ADCS
+  - bits
+  - spi
+  - diff
+  - clock
+- MCU
+  - wifi, bt
+  - lua - esp
+  - Arduino
+- COM Protocol
+  - TCP
+  - Ws, CoAP
+  - MQTT
+- Software engine
+  - Protocol interface
+- Server
+  - (Broker)
+  - DB
+  - GUI
+  - PWA
+- API and other tech
+ 
 *** Impedancia - aplicado
 *** NO EXPLICAR Q ES BODE
 *** EXPLICAR ANCHO DE BANDA
-* Marco Practico
-\chapter{Marco Pr\'actico}
+* \chapter{Marco Pr\'actico}
 ** Esquema general del proyecto
 ** Etapa n
 *** Requerimientos
@@ -93,8 +166,7 @@
 ** Resultados y Discusión
 *** Análisis de costos
 
-* Marco Conclusivo
-\chapter{Marco Conclusivo}
+* \chapter{Marco Conclusivo}
 ** Conclusiones
 ** Recomendaciones 
 ** Trabajo futuro*

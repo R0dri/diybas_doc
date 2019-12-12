@@ -1,21 +1,282 @@
 \chapter{Marco Referencial}
-\section{Estado del arte [obj especificos]}
-\label{sec:orged209ee}
-\subsection{Neurosky}
-\label{sec:org2a00370}
-\subsection{Tecnico}
-\label{sec:org9fe16f2}
+\section{Introducción}
+\label{sec:org49b042a}
+Las bioseñales son originadas por la actividad eléctrica generada por un ser viviente. Estas pueden ser impulsos eléctricos enviados a los músculos para contracción, así como los generados por las sinapsis del cerebro. Las señales más conocidas y estudiadas son: las  provenientes del corazón (ECG), del movimiento intraocular (EOG), del movimiento muscular (EMG) y de la actividad cerebral (EEG). 
+
+Estas señales pueden ser medidas por medio de electrodos colocados en la superficie de piel más cercana al origen del impulso eléctrico. Sin embargo, este método presenta grandes problemas con el ruido considerando que este, puede provenir de la carga electroestática que se encuentre sobre la piel o pelo en el área de contacto. Adicionalmente, se presentan muchos artefactos, señales que no están relacionadas a la señal de interés [6]; tanto de origen biológico como no biológico.
+
+En las bioseñales, los artefactos presentes suelen ser de la misma o incluso mayor magnitud que la señal de interés. Una forma de evitar estas interferencias es emplear amplificadores diferenciales como parte del diseño electrónico del dispositivo de adquisición [17]. Pero además, en conjunto, se utiliza una cantidad de electrodos elevada para reducir los artefactos y colocarlos en disposiciones específicas según el caso de uso [8].
+
+Por otro lado, existen dos tipos de usuarios que emplean y manipulan dispositivos de adquisición de bioseñales o BAS: 
+\begin{enumerate}
+\item Investigadores y desarrolladores de tecnologías. Estos emplean los dispositivos BAS para crear interfaces con computadores que asocian patrones en las bioseñales con intenciones del usuario. Cada asociación puede servir como un canal de entrada para la interfaz. Generalmente se realiza el uso de EEG para crear una BCI Interfaz Cerebro-Computador. En esta aplicación, pueden haber múltiples asociaciones de actividades resultando en múltiples canales de entrada para la interfaz desarrollada. Por ejemplo, un sistema BCI puede reconocer actividad cerebral motora (MI - Motor Imagery) de la mano izquierda y MIB de pie y/o mano derecha [4]; y finalmente asociar estas actividades como dos acciones en la interfaz.
+
+\item Practicantes de ciencias como la medicina y psicología para el diagnóstico, rehabilitación, monitoreo; así como estudio de la naturaleza y comportamiento de las señales. En el caso de la medicina, puede ser critico en algunos casos. Un ejemplo es el monitoreo de la presencia de actividad cerebral en pacientes en coma [14].  En otros casos puede ser utilizados en estudios de polisomnografía para diagnosticar enfermedades o trastornos en el sueño.
+\end{enumerate}
+
+No obstante, todos los casos se ven afectados por el número de electrodos disponibles debido a que la actividad cerebral se da simultáneamente en múltiples lugares. Mientras mayor sea la cantidad de electrodos, se obtendrán mejores resultados. Un ejemplo  de esto son los estudios de polisomnografía, donde es necesario contar con\ldots{} [2].
+
+\section{Planteamiento del problema}
+\label{sec:org1463ca8}
+
+La medición de bioseñales requiere hardware especializado ya que por naturaleza es una tarea compleja. Esto se debe a que las bioseñales son muy tenues en tensión eléctrica ademas de encontrarse en un ambiente de mucho ruido e interferencias de otras bioseñales. Para lograr una medición efectiva se deben implementar circuitos analógicos que lidien con este tipo de señales con baja taza de señal respecto al ruido (SNR).
+
+Medir las señales EEG requieren hardware aun más especializado ya que es la más tenue de las bioseñales, pues su magnitud promedia los 100µV[7]. Mientras, el ruido se mantiene al mismo nivel que en todas las bioseñales por lo que se requiere mayor tratamiento. Si bien el diseño es simple e igual para cada canal, cada uno requiere un circuito propio ya que la señal se debe pre-procesar de manera analógica.
+
+Los dispositivos para EEG que cumplen requerimientos de estandarizaciónes internacionales son inaccesibles para pequeños grupos de investigación. Los costos se elevan para cumplir requerimientos y recomendaciónes de instituciones como la IFCN y la ACNS, generalmente de manera proporcional al número de canalaes.
+
+El costo del hardware causa que exista menos cantidad de desarrollo de neurociencia a nivel mundial. Este campo de la ciencia se mantiene contraido ya que existen pocas personas capaces de hacer investigaciones fidedignas. En resultado el mercado se mantiene pequeño causando que los proveedores de equipos deban mantener un precio alto para conservar la rentabilidad.
+
+Para reducir los costos se suele sacrificar alguno de los siguientes 3 aspectos: Uno, la cantidad de canales. Esto es evidente por lo mencionado anteriormente; cada canal requiere un numero de componentes necesarios para tratar la señal de manera analogica. Dos, software e interfaz. Para mantener la rentabilidad, algunos dispositivos como los de emotiv [ref] restringen el uso del dispositivo por medio de licencias en un software propietario. Asimismo se restringe la compatibilidad con terceros limitando la funcionalidad. Tres, modularidad del hardware. Los dispositios EEG cuentan con los componentes necesarios para medir múltiples tipos de señales y bioseñales; sin embargo, pocos dispositivos como el openBCI [ref] cuentan con los medios necesarios integrados en su diseño para poder ser adaptados.
+
+La poca variedad en productos dificulta la optimización de costos en función a la aplicación. Esto causa que el usuario termine optando por la opcion próxima más potente que en muchos casos, es un salto muy grande en el costo [refs].
+
+\subsection{Definición del problema}
+\label{sec:orgc23687b}
+Medir bioseñales EEG es una tarea bastante compleja, por lo cual las máquinas capaces de cumplir la tarea son costosas. Además, es muy difícil reducir costos ya que la variedad de productos del tipo BAS para EEG \uline{en el rango menor a los 1000 USD} es muy baja así como lo es la flexibilidad, compatibilidad y facilidad de uso del hardware y software. Esto supone dificultades en especial para las distintas aplicaciones que requieren distintas capacidades del hardware. La mayoría de los BAS para EEG cuentan con las capacidades necesarias para múltiples tipos de señales e inclusive bioseñales, pero no cuentan con los medios necesarios integrados en su diseño para poder ser adaptados. Además, las dificultades presentes se acentúan debido a la poca flexibilidad que poseen en su diseño tanto en hardware como software para los usuarios que no están involucrados en el desarrollo tecnológico.
+\section{Objetivos}
+\label{sec:orge490128}
+\subsection{Objetivo general}
+\label{sec:orge9d2120}
+Diseñar e implementar un sistema modular que permita medir y grabar digitalmente bioseñales EEG.
+\subsection{Objetivos específicos}
+\label{sec:org596e2d7}
+\begin{enumerate}
+\item Medir, grabar y visualizar señales EEG en vivo de manera digital en 2 canales independientes.
+\item Validar las mediciones según su forma y frecuencia comparado con mediciones realizadas por otros dispositivos.
+\item Diseñar e implementar un sistema modular.
+\item Diseñar un sistema de protección contra descargas electroestáticas.
+\item Desarrollar software cuyo uso no requiera conocimientos de programación para el uso del sistema.
+\item Implementar un sistema de comunicación de datos a través de WiFi.
+\end{enumerate}
+\section{Justificación}
+\label{sec:org0a2ade5}
+El proyecto se ve entonces justificado con motivo de reducir la brecha de conocimiento al generar más documentación al respecto y así mismo incrementar la investigación al proveer de una alternativa que, por su flexibilidad, pueda ser más adecuada a la hora de elegir un dispositivo en un caso de uso más específico. El aporte académico en un punto de vista conceptual brindará un formato más sencillo y práctico para entender los conceptos de la electroencefalografía y neurociencia, producto de la aplicación y documentación que se van a generar. En el área técnica aporta un diseño que sea fácil de reproducir para aplicaciones que requieran el uso de un sistema de medición de este tipo.
+Del punto de vista académico el aporte es interdisciplinario, uniendo conceptos de sistemas informáticos como el ser redes de comunicación y bases de datos con sistemas de computación embebidos. Asimismo, se le suma el diseño de un dispositivo de adquisición de señales analógicas a digitales con una precisión y robustez muy elevada.
+\section{Limites y Alcances}
+\label{sec:orgcde6f5e}
+\subsection{Límites}
+\label{sec:org50d0b59}
+\begin{enumerate}
+\item Si bien este proyecto apunta a cumplir ciertos niveles de estándares internacionales IFCN, no se llevara acabo ningún proceso de certificación.
+\item No se evaluará el alcance del proyecto en la comunidad de código abierto.
+\item No se implementarán todas las variaciones posibles de módulos compatibles para el diseño, se limitará a una unidad y un tipo específico por módulo.
+\item No se optimizará la comunicación con websockets u otros medios para minimizar el tiempo de desfase en recibir y mostrar los datos.
+\item No se implementara un medio para guardar datos en caso de desconección.
+\item No se implementará un reloj en tiempo real en el microcontrolador.
+\end{enumerate}
+\subsection{Alcances}
+\label{sec:org59ed485}
+\begin{enumerate}
+\item Accesible
+\begin{itemize}
+\item[{$\square$}] Código Abierto, Documentación amplia. Proporcionar los diseños y breves manuales en repositorios cómo GitHub con su respectiva wiki. Generar una licencia sobre el contenido.
+\item Diseño mínimo básico expansible. El sistema debe poder cumplir con las tareas mínimas requeridas para tener una funcionalidad completa sin asistencia de otros dispositivos EXCEPTO UNA COMPUTADORA. El diseño no debe limitar la expansión en funcionalidades ni capacidades.
+\end{itemize}
+\item Flexible/potenciable
+\begin{itemize}
+\item Diseño modular con compatibilidad con EEG, ECG, EMG, EOG al variar la magnitud de amplificación, reemplazo de filtros y cantidad de canales.
+\begin{itemize}
+\item Diseño flexible. El diseño debe ser capaz de ser modificado sin tener completo conocimiento sobre todo el diseño para adaptar su funcionamiento y aumentar sus capacidades máximas con pocos cambios.
+\end{itemize}
+\item Numero de entradas expansible. El sistema original implementado medirá hasta 2 canales digitales; sin embargo el sistema debe ser capaz de aumentar el número de entradas hasta al menos 24 canales con el intercambio o adición de nuevos módulos.
+\end{itemize}
+\item Facilidad de uso (amigable)
+\begin{itemize}
+\item[{$\square$}] Requerimiento de cero programación. Tanto la configuración inicial como el uso del dispositivo se deben poder llevar a cabo sin conocimientos en programación ni computacionalmente avanzados.
+\item[{$\square$}] Tener un manual de usuario completo. Este manual debe indicar el uso del software y hardware.
+\end{itemize}
+\item Seguridad
+\begin{itemize}
+\item[{$\square$}] Protección contra descargas ESD al circuito. El sistema debe contar con protección de descargas electroestáticas sobre el circuito.
+\item Protección contra descargas desde fuente alimentación. El sistema debe contar con protección a menos de 1kV por 1s a través de un aislamiento galvánico o utilizar una batería que fisicamente limite la energía total.
+\end{itemize}
+\end{enumerate}
+
+\chapter{Marco Te\'orico}
+\section{Estado del Arte [obj especificos]}
+\label{sec:orga4155bd}
+
+
+\subsection{Electrónico}
+\label{sec:org3c24c2c}
+\subsubsection{PWR - ESD}
+\label{sec:org9483634}
+\subsubsection{Analógico}
+\label{sec:orgfffc89f}
+\begin{enumerate}
+\item OPA
+\label{sec:org5642dad}
+\begin{enumerate}
+\item INA
+\label{sec:orgc19bf3a}
+\end{enumerate}
+\item ADC
+\label{sec:org4144647}
+\item ESD
+\label{sec:org1055d47}
+\end{enumerate}
+\subsubsection{Digital}
+\label{sec:org7569d82}
+\begin{enumerate}
+\item SPI, I2C, Serial
+\label{sec:orgbdc6479}
+\item MCU (ESP, teensy)
+\label{sec:org495d4dd}
+\end{enumerate}
 \subsection{Modular}
-\label{sec:org6c62e01}
-\section{Fundamentos}
-\label{sec:org44538b5}
-\subsection{siencia investigada para desarrollar}
-\label{sec:org36158c1}
-\subsection{ADCS}
-\label{sec:org9d32c7d}
+\label{sec:orgbf0af0d}
+\subsubsection{CH[spi]}
+\label{sec:orgbdc7568}
+\subsubsection{DRL}
+\label{sec:orge76d276}
+\subsubsection{ADC+MCU}
+\label{sec:orgcf00686}
+\subsubsection{PWR}
+\label{sec:orgc4aeb97}
+
+\subsection{Analógico}
+\label{sec:orga3646ba}
+\subsubsection{INA CMMR>120db (laser trimmed)}
+\label{sec:org378ba0e}
+\subsubsection{ADC 24bits}
+\label{sec:orgf5daa5e}
+\subsection{Comunicación}
+\label{sec:orgdefc4de}
+\subsubsection{SPI, I2C, Serial}
+\label{sec:org34879a6}
+\subsubsection{BT, WIFI}
+\label{sec:org3e671ed}
+\begin{enumerate}
+\item HTTP, MQTT, WS, CoAP
+\label{sec:orga085a75}
+\end{enumerate}
+\subsection{Software}
+\label{sec:org97fb765}
+\subsubsection{Engine}
+\label{sec:org8943f39}
+\subsubsection{BD}
+\label{sec:orgcf44456}
+\subsubsection{GUI}
+\label{sec:orga85c54c}
+\subsubsection{Com protocol}
+\label{sec:org0a31dc6}
+\subsubsection{(broker - mqtt)}
+\label{sec:org0205de2}
+\subsubsection{SQL, Mongo, Cassandra, TimeSeries}
+\label{sec:org1958b90}
+
+
+\subsection{Neurosky}
+\label{sec:org49f1f6f}
+\subsection{ModularEEG}
+\label{sec:org6a32a88}
+\subsection{Emotivoc}
+\label{sec:org495d2ee}
+\subsection{OpenBCI}
+\label{sec:orgb7f02f4}
+
+\subsection{Tecnico}
+\label{sec:orgfd9e4cb}
+\subsection{Modular}
+\label{sec:org4eca4fd}
+\section{Fundamentos Teóricos}
+\label{sec:orgf7ded14}
+\subsection{ciencia investigada para desarrollar}
+\label{sec:orgc043014}
+\begin{itemize}
+\item Electrodos (tipos)
+\begin{itemize}
+\item Activo
+\item Pasivo
+\item Materiales
+\end{itemize}
+\item Impedancia
+\item Potencia
+\item Virtual GND
+\item ESD
+\item ESD/DC-DC
+\item Filtros
+\begin{itemize}
+\item BP
+\item Notch
+\end{itemize}
+\item INA
+\begin{itemize}
+\item CMRR
+\item 3 vs 2 opa
+\item rail-rail
+\item slew rate
+\end{itemize}
+\item Gain basic opa
+\begin{itemize}
+\item PGA
+\end{itemize}
+\item ADCS
+\begin{itemize}
+\item bits
+\item spi
+\item diff
+\item clock
+\end{itemize}
+\item MCU
+\begin{itemize}
+\item wifi, bt
+\item lua - esp
+\item Arduino
+\end{itemize}
+\item COM Protocol
+\begin{itemize}
+\item TCP
+\item Ws, CoAP
+\item MQTT
+\end{itemize}
+\item Software engine
+\begin{itemize}
+\item Protocol interface
+\end{itemize}
+\item Server
+\begin{itemize}
+\item (Broker)
+\item DB
+\item GUI
+\item PWA
+\end{itemize}
+\item API and other tech
+\end{itemize}
+
 \subsection{Impedancia - aplicado}
-\label{sec:org722e6eb}
+\label{sec:org5572965}
 \subsection{NO EXPLICAR Q ES BODE}
-\label{sec:orga5299e9}
+\label{sec:org88838dc}
 \subsection{EXPLICAR ANCHO DE BANDA}
-\label{sec:org494f12b}
+\label{sec:orge4ac79c}
+\chapter{Marco Pr\'actico}
+\section{Esquema general del proyecto}
+\label{sec:orga5c9b8f}
+\section{Etapa n}
+\label{sec:org9d127d2}
+\subsection{Requerimientos}
+\label{sec:org0ca573e}
+\subsection{Cálculos y Dimensionamiento}
+\label{sec:org70d3a4b}
+\subsection{Desarrollo}
+\label{sec:org1d75ce9}
+\section{Herramientas}
+\label{sec:orgda3c4e6}
+\subsection{Hardware}
+\label{sec:org3752304}
+\subsection{Software}
+\label{sec:orgecca71c}
+\section{Resultados y Discusión}
+\label{sec:org745b7cd}
+\subsection{Análisis de costos}
+\label{sec:org7fdab86}
+
+\chapter{Marco Conclusivo}
+\section{Conclusiones}
+\label{sec:org26436e4}
+\section{Recomendaciones}
+\label{sec:org913deb3}
+\section{Trabajo futuro*}
+\label{sec:org641fcea}

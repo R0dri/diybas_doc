@@ -1,26 +1,51 @@
-\message{ !name(template.tex)}
+% Created 2019-12-11 Wed 18:42
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{rodri}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={rodri},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.0.50 (Org mode 9.2.3)}, 
+ pdflang={English}}
+\begin{document}
+
+\tableofcontents
 
 \input{EncabezadoTesisMSc}
 
 \usepackage{titlesec} 
-\renewcommand{\tablename}{\textbf{Tabla}}
-\renewcommand{\figurename}{\textbf{Figura}}
+\renewcommand{\tablename}\{\textbf{Tabla}\}
+\renewcommand{\figurename}\{\textbf{Figura}\}
 \renewcommand{\listtablename}{Lista de Tablas}
 \renewcommand{\listfigurename}{Lista de Figuras}
 \renewcommand{\labelitemi}{$\bullet$}
 \titleformat{\chapter}[display]
-{\bfseries\Large}
-{\filright\MakeUppercase{\chaptertitlename} \Huge\thechapter}
-{1ex}
-{\titlerule\vspace{1ex}\filleft}
+\{\bfseries\Large\}
+\{\filright\MakeUppercase{\chaptertitlename} \Huge\thechapter\}
+\{1ex\}
+\{\titlerule\vspace{1ex}\filleft\}
 [\vspace{1ex}\titlerule]
 
 
 
 \begin{document}
-
-\message{ !name(template.tex) !offset(-3) }
-
 
 
 \pagenumbering{roman}
@@ -31,6 +56,8 @@
 \include{Tab_Simbolos/TabSimbolosMSc}
 
 \tableofcontents
+\end{document}
+\end{document}
 \listoffigures
 
 \listoftables
@@ -68,11 +95,10 @@
 \label{sec:org248ce87}
 
 
-\addcontentsline{toc}{chapter}\{\numberline{}Bibliograf$\backslash$'\{\i\}a\}
+\addcontentsline{toc}{chapter}$\backslash${\numberline{}Bibliograf\(\backslash\)'$\backslash${\i$\backslash$}a$\backslash$}
 \bibliographystyle{plaindin_esp}
 \bibliography{BibliMSc}
 \include{Anexos/Anexos}
 
 \end{document}
-
-\message{ !name(template.tex) !offset(-78) }
+\end{document}

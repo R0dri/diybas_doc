@@ -33,6 +33,7 @@
 \listoftables
 \newpage
 \pagenumbering{arabic}
+\include{org/doc.org}
 \include{Kap1/Kap1}
 \include{Kap2/Kap2}
 \include{Kap3/Kap3}

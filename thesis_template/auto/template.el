@@ -1,29 +1,21 @@
 (TeX-add-style-hook
  "template"
  (lambda ()
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "path")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "url")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "nolinkurl")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperbaseurl")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperimage")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperref")
+   (add-to-list 'LaTeX-verbatim-macros-with-delims-local "path")
    (TeX-run-style-hooks
     "EncabezadoTesisMSc"
     "HojaTitulo/HojaTituloMSc"
     "Tab_Simbolos/TabSimbolosMSc"
+    "org/doc"
     "Kap1/Kap1"
-    "Kap2/Kap2"
-    "Kap3/Kap3"
-    "Kap4/Kap4"
     "Anexos/Anexos"
     "titlesec")
-   (LaTeX-add-labels
-    "sec:orga0a55a0"
-    "sec:orgd48739a"
-    "sec:org213453c"
-    "sec:org132391a"
-    "sec:orgca7b496"
-    "sec:org3bc9b09"
-    "sec:org8b0323f"
-    "sec:orgc8c9f62"
-    "sec:org9985f74"
-    "sec:orgd8cf818"
-    "sec:orgbd8b0ad"
-    "sec:org8eeeac5")
    (LaTeX-add-bibliographies
     "BibliMSc"))
  :latex)

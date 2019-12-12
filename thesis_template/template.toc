@@ -1,61 +1,77 @@
 \babel@toc {spanish}{}
 \contentsline {chapter}{\numberline {1}Marco Referencial}{1}% 
-\contentsline {section}{\numberline {1.1}Introducci\'on}{1}% 
-\contentsline {section}{\numberline {1.2}Planteamiento del Problema}{2}% 
-\contentsline {subsection}{\numberline {1.2.1}Definici\'on del problema}{2}% 
+\contentsline {section}{\numberline {1.1}Introducci\~A{^3}n}{1}% 
+\contentsline {section}{\numberline {1.2}Planteamiento del problema}{1}% 
+\contentsline {subsection}{\numberline {1.2.1}Definici\~A{^3}n del problema}{2}% 
 \contentsline {section}{\numberline {1.3}Objetivos}{2}% 
-\contentsline {subsection}{\numberline {1.3.1}Objetivo General}{2}% 
-\contentsline {subsection}{\numberline {1.3.2}Objetivos espec\'ificos}{2}% 
-\contentsline {section}{\numberline {1.4}Justificaci\'on}{2}% 
-\contentsline {section}{\numberline {1.5}L\'imites y Alcances}{2}% 
-\contentsline {subsection}{\numberline {1.5.1}L\'imites}{2}% 
+\contentsline {subsection}{\numberline {1.3.1}Objetivo general}{2}% 
+\contentsline {subsection}{\numberline {1.3.2}Objetivos espec\~A\-ficos}{2}% 
+\contentsline {section}{\numberline {1.4}Justificaci\~A{^3}n}{3}% 
+\contentsline {section}{\numberline {1.5}Limites y Alcances}{3}% 
+\contentsline {subsection}{\numberline {1.5.1}L\~A\-mites}{3}% 
 \contentsline {subsection}{\numberline {1.5.2}Alcances}{3}% 
 \contentsline {chapter}{\numberline {2}Marco Te\'orico}{4}% 
-\contentsline {section}{\numberline {2.1}Estado del Arte}{4}% 
-\contentsline {subsection}{\numberline {2.1.1}Enfoque 1}{5}% 
-\contentsline {subsection}{\numberline {2.1.2}Enfoque 2}{5}% 
-\contentsline {subsection}{\numberline {2.1.3}Enfoque n}{5}% 
-\contentsline {subsection}{\numberline {2.1.4}Discusi\'on}{5}% 
-\contentsline {section}{\numberline {2.2}Fundamentos Te\'oricos}{6}% 
-\contentsline {subsection}{\numberline {2.2.1}T\'ecnica/concepto/Algoritmo 1}{6}% 
-\contentsline {subsection}{\numberline {2.2.2}T\'ecnica/concepto/Algoritmo 2}{6}% 
-\contentsline {subsection}{\numberline {2.2.3}T\'ecnica/concepto/Algoritmo 3}{6}% 
-\contentsline {subsection}{\numberline {2.2.4}T\'ecnica/concepto/Algoritmo n}{6}% 
-\contentsline {chapter}{\numberline {3}Marco Pr\'actico}{7}% 
-\contentsline {section}{\numberline {3.1}Esquema general del proyecto}{7}% 
-\contentsline {section}{\numberline {3.2}Etapa 1}{7}% 
-\contentsline {subsection}{\numberline {3.2.1}Requerimientos}{8}% 
-\contentsline {subsection}{\numberline {3.2.2}C\'alculos/dimensionamiento}{8}% 
-\contentsline {subsection}{\numberline {3.2.3}Desarrollo }{8}% 
-\contentsline {section}{\numberline {3.3}Etapa 2}{9}% 
-\contentsline {subsection}{\numberline {3.3.1}Requerimientos}{9}% 
-\contentsline {subsection}{\numberline {3.3.2}C\'alculos/dimensionamiento}{9}% 
-\contentsline {subsection}{\numberline {3.3.3}Desarrollo }{9}% 
-\contentsline {section}{\numberline {3.4}Etapa 3}{10}% 
-\contentsline {subsection}{\numberline {3.4.1}Requerimientos}{10}% 
-\contentsline {subsection}{\numberline {3.4.2}C\'alculos/dimensionamiento}{10}% 
-\contentsline {subsection}{\numberline {3.4.3}Desarrollo }{10}% 
-\contentsline {section}{\numberline {3.5}Herramientas}{10}% 
-\contentsline {subsection}{\numberline {3.5.1}Hardware}{10}% 
-\contentsline {subsection}{\numberline {3.5.2}Software}{10}% 
-\contentsline {section}{\numberline {3.6}Resultados y discusi\'on}{10}% 
-\contentsline {chapter}{\numberline {4}Marco Conclusivo}{11}% 
-\contentsline {section}{\numberline {4.1}Conclusiones}{11}% 
-\contentsline {section}{\numberline {4.2}Recomendaciones}{11}% 
-\contentsline {section}{\numberline {4.3}Trabajo Futuro}{11}% 
-\contentsline {section}{\numberline {4.4}Marco Referencial}{12}% 
-\contentsline {section}{\numberline {4.5}Marco te\~A{^3}rico}{12}% 
-\contentsline {subsection}{\numberline {4.5.1}Estado del arte [obj especificos]}{12}% 
-\contentsline {subsubsection}{Neurosky}{12}% 
-\contentsline {subsubsection}{Tecnico}{12}% 
-\contentsline {subsubsection}{Modular}{12}% 
-\contentsline {subsection}{\numberline {4.5.2}Fundamentos}{12}% 
-\contentsline {subsubsection}{siencia investigada para desarrollar}{12}% 
-\contentsline {subsubsection}{ADCS}{12}% 
-\contentsline {subsubsection}{Impedancia - aplicado}{12}% 
-\contentsline {subsubsection}{NO EXPLICAR Q ES BODE}{12}% 
-\contentsline {subsubsection}{EXPLICAR ANCHO DE BANDA}{12}% 
-\contentsline {chapter}{\{}{12}% 
-\contentsline {chapter}{\numberline {A}Anexo: Nombrar el anexo A de acuerdo con su contenido}{13}% 
-\contentsline {chapter}{\numberline {B}Anexo: Nombrar el anexo B de acuerdo con su contenido}{14}% 
-\contentsline {chapter}{\numberline {C}Anexo: Nombrar el anexo C de acuerdo con su contenido}{15}% 
+\contentsline {section}{\numberline {2.1}Estado del Arte [obj especificos]}{4}% 
+\contentsline {subsection}{\numberline {2.1.1}Electr\~A{^3}nico}{4}% 
+\contentsline {subsubsection}{PWR - ESD}{4}% 
+\contentsline {subsubsection}{Anal\~A{^3}gico}{4}% 
+\contentsline {subsubsection}{Digital}{4}% 
+\contentsline {subsection}{\numberline {2.1.2}Modular}{5}% 
+\contentsline {subsubsection}{CH[spi]}{5}% 
+\contentsline {subsubsection}{DRL}{5}% 
+\contentsline {subsubsection}{ADC+MCU}{5}% 
+\contentsline {subsubsection}{PWR}{5}% 
+\contentsline {subsection}{\numberline {2.1.3}Anal\~A{^3}gico}{5}% 
+\contentsline {subsubsection}{INA CMMR>120db (laser trimmed)}{5}% 
+\contentsline {subsubsection}{ADC 24bits}{5}% 
+\contentsline {subsection}{\numberline {2.1.4}Comunicaci\~A{^3}n}{5}% 
+\contentsline {subsubsection}{SPI, I2C, Serial}{5}% 
+\contentsline {subsubsection}{BT, WIFI}{5}% 
+\contentsline {subsection}{\numberline {2.1.5}Software}{6}% 
+\contentsline {subsubsection}{Engine}{6}% 
+\contentsline {subsubsection}{BD}{6}% 
+\contentsline {subsubsection}{GUI}{6}% 
+\contentsline {subsubsection}{Com protocol}{6}% 
+\contentsline {subsubsection}{(broker - mqtt)}{6}% 
+\contentsline {subsubsection}{SQL, Mongo, Cassandra, TimeSeries}{6}% 
+\contentsline {subsection}{\numberline {2.1.6}Neurosky}{6}% 
+\contentsline {subsection}{\numberline {2.1.7}ModularEEG}{6}% 
+\contentsline {subsection}{\numberline {2.1.8}Emotivoc}{6}% 
+\contentsline {subsection}{\numberline {2.1.9}OpenBCI}{6}% 
+\contentsline {subsection}{\numberline {2.1.10}Tecnico}{6}% 
+\contentsline {subsection}{\numberline {2.1.11}Modular}{6}% 
+\contentsline {section}{\numberline {2.2}Fundamentos Te\~A{^3}ricos}{6}% 
+\contentsline {subsection}{\numberline {2.2.1}ciencia investigada para desarrollar}{6}% 
+\contentsline {subsection}{\numberline {2.2.2}Impedancia - aplicado}{8}% 
+\contentsline {subsection}{\numberline {2.2.3}NO EXPLICAR Q ES BODE}{8}% 
+\contentsline {subsection}{\numberline {2.2.4}EXPLICAR ANCHO DE BANDA}{8}% 
+\contentsline {chapter}{\numberline {3}Marco Pr\'actico}{9}% 
+\contentsline {section}{\numberline {3.1}Esquema general del proyecto}{9}% 
+\contentsline {section}{\numberline {3.2}Etapa n}{9}% 
+\contentsline {subsection}{\numberline {3.2.1}Requerimientos}{9}% 
+\contentsline {subsection}{\numberline {3.2.2}Ca\`I\@inpenc@undefined@ {ansinew}lculos y Dimensionamiento}{9}% 
+\contentsline {subsection}{\numberline {3.2.3}Desarrollo}{9}% 
+\contentsline {section}{\numberline {3.3}Herramientas}{9}% 
+\contentsline {subsection}{\numberline {3.3.1}Hardware}{9}% 
+\contentsline {subsection}{\numberline {3.3.2}Software}{9}% 
+\contentsline {section}{\numberline {3.4}Resultados y Discusio\`I\@inpenc@undefined@ {ansinew}n}{9}% 
+\contentsline {subsection}{\numberline {3.4.1}Ana\`I\@inpenc@undefined@ {ansinew}lisis de costos}{9}% 
+\contentsline {chapter}{\numberline {4}Marco Conclusivo}{10}% 
+\contentsline {section}{\numberline {4.1}Conclusiones}{10}% 
+\contentsline {section}{\numberline {4.2}Recomendaciones}{10}% 
+\contentsline {section}{\numberline {4.3}Trabajo futuro*}{10}% 
+\contentsline {chapter}{\numberline {5}Marco Referencial}{11}% 
+\contentsline {section}{\numberline {5.1}Introducci\'on}{11}% 
+\contentsline {section}{\numberline {5.2}Planteamiento del Problema}{12}% 
+\contentsline {subsection}{\numberline {5.2.1}Definici\'on del problema}{12}% 
+\contentsline {section}{\numberline {5.3}Objetivos}{12}% 
+\contentsline {subsection}{\numberline {5.3.1}Objetivo General}{12}% 
+\contentsline {subsection}{\numberline {5.3.2}Objetivos espec\'ificos}{12}% 
+\contentsline {section}{\numberline {5.4}Justificaci\'on}{13}% 
+\contentsline {section}{\numberline {5.5}L\'imites y Alcances}{13}% 
+\contentsline {subsection}{\numberline {5.5.1}L\'imites}{13}% 
+\contentsline {subsection}{\numberline {5.5.2}Alcances}{13}% 
+\contentsline {chapter}{\numberline {A}Anexo: Nombrar el anexo A de acuerdo con su contenido}{14}% 
+\contentsline {chapter}{\numberline {B}Anexo: Nombrar el anexo B de acuerdo con su contenido}{15}% 
+\contentsline {chapter}{\numberline {C}Anexo: Nombrar el anexo C de acuerdo con su contenido}{16}% 
+\contentsline {chapter}{\hbox to\@tempdima {\hfil }Bibliograf\'{\i }a}{14}% 
