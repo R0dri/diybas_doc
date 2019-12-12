@@ -6,32 +6,41 @@
 * * VIN IN 0 AC 1 DC 2.5 SIN(2.5 1.73 10)
 * VNOISE IN 0 AC 0 DC 2.5
 
-* Single ended power supply with Virtual ground at 2.5v
-VP VCCG 0 5
+*******************
+* Supply Voltages *
+*******************
+VG VCCG 0 15
 VR VGND 0 2.5
 VM VEEG 0 0
 
 * Noise and patient simulation
-V5 V50 0 AC 1 DC 0 SIN(0 0.1 50)
-Vdc VDC V50 SIN(1 0.4 1)
-Vcm VNoise VDC SIN(1 0.05 1k)
-Vcm1 VCM VNoise SIN(1 0.025 10k)
-Vcm2 VCM2 VCM 0.1
+Vcm1 VCM 0 PWL REPEAT FOREVER (file=signals/simulated/signals.txt) ENDREPEAT
+*Vcm2 VCM2 VCM 0.1
 
 
-Vino signal 0 SINE(2.5 100u 20)
+* Vino signal 0 SINE(2.5 100u 20)
+Vino signal 0 PWL REPEAT FOREVER (file=signals/samplegit/data1/data0_1.csv) ENDREPEAT
 
-Vin1 source1 VCM SINE(0 100u 20)
-Vin2 source2 VCM2 SINE(0 100u 18)
-Vin3 artifact source2 SINE(0 100u 88)
+* Vin1 source1 VCM SINE(0 100u 20)
+Vin1 source1 VCM PWL REPEAT FOREVER (file=signals/samplegit/data1/data0_1.csv) ENDREPEAT
+*Vin2 source2 VCM2 SINE(0 100u 18)
+*Vin2 source2 VCM2 PWL REPEAT FOREVER (file=signals/samplegit/data1/data0_1.csv) ENDREPEAT
+*Vin3 artifact source2 SINE(0 100u 88)
 
+*****************
+* Import Signals *
+*****************
+Vtest testi 0 PWL (file=filters.txt)
 
-XD source1 VCM VCCG VEEG VGND OUT_C1 INA
-XR source2 VCM VCCG VEEG VGND OUT_C2 INA
-XA artifact VCM VCCG VEEG VGND OUT_C3 INA
+***********
+* Modulos *
+***********
+XD source1 OUT_C1 VCM VCCG VEEG VGND INA
+*XR source2 VCM VCCG VEEG VGND OUT_C2 INA
+*XA artifact VCM VCCG VEEG VGND OUT_C3 INA
 Rload1 OUT_C1 0 10K
-Rload2 OUT_C2 0 10K
-Rload3 OUT_C3 0 10K
+*Rload2 OUT_C2 0 10K
+*Rload3 OUT_C3 0 10K
 
 
 
@@ -41,19 +50,21 @@ Rload3 OUT_C3 0 10K
 * .TEMP 27
 * .AC DEC 100 16E-3 10E6
 * .TRAN 50us 0.5
-.TRAN 1
+* .TRAN 1 3
+.tran 1s 3s
 *.NOISE V(OUT) VNOISE DEC 100 16E-3 10E3
 * .OPTIONS CHGTOL=10F ITL1=1000 ITL2=40 ITL4=20 TRTOL=14
-.PROBE V(signal)
+.PROBE V(signal) V(vcm)
+.PROBE V(signal1) V(signal2)
 .PROBE V(out_c1) V(out_c2) V(out_c3)
 .PROBE V(source1) V(source2) V(artifact)
-* .PLOT(signal)
+* .PLOT(signal)
 .lib ADI1.lib
 
 
 
 
-.SUBCKT INA IN+ IN- VCC VEE VREF OUT
+.SUBCKT INA IN+ OUT IN- VCC VEE VREF
 *AD8422 IN- RG- RG+ IN+ -Vs   REF  VOUT  +Vs
 XAD     IN- N2  N3  IN+  VEE VREF   OUT   VCC  AD8422
 * Gain setter
